@@ -304,17 +304,23 @@ PAGES = [
         "intro": "",
         "elements": [
             {
-                "key": "alone",
+                "key": "alone_preference",
                 "label": "How present should the trip sitter be during the trip",
                 "type": "radio",
                 "options": ["I would like to not be left alone at all, unless I specifically say so", "I dont care too much if the trip sitter goes away to grab something to eat, but I will communicate if I change my mind", "I am very fine with being alone, maybe I even want that. I know that I can always ask the trip sitter for company", "i dont know"],
             },
             {
-                "key": "touch",
+                "key": "touch_preference",
                 "label": "How comfortable are you with touch? (hand holding, hugging, putting a hand on the body weightfully) (It can have great therapeutic potential, but only if handeld right)",
                 "type": "radio",
                 "options": ["I dont like being touched at all, unless I specifically say so", "I am okay with touch, if it feels right in the moment. I know I can communicate in both directions", "I enjoy this kind of touch. I will communicate if I dont like something.", "i dont know"],
             },  
+            {
+                "key": "setting_preference",
+                "label": "Do you have a preference where you'd like to trip?",
+                "type": "radio",
+                "options": ["at someones home", "in nature", "somewhere else that I will tell the tripsitter", "no preference"],
+            },
             {
                 "key": "other_preferences",
                 "label": "Do you have any other preferences the trip sitter should know?",
@@ -357,6 +363,22 @@ PAGES = [
             },
         ],
     },
+    {
+        "title": "Legal Confirmation",
+        "intro": "",
+        "elements": [
+{"type": "markdown", "label": """### Before you finish
+
+This is a decision you are making for yourself. I will do what I can to make it safe and useful — screening, preparation, sitting, integration — but nobody can guarantee a psychedelic experience goes well. Please only continue if you are choosing this freely."""},
+            {
+                "key": "legal_confirmation",
+                "label": "I confirm that agree and understand:",
+                "type": "radio",
+                "options": ["yes", "no"],
+            },
+        ],
+    },
+    
 ]
 
 
