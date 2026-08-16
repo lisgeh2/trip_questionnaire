@@ -307,11 +307,11 @@ PAGES = [
                 "key": "alone",
                 "label": "How present should the trip sitter be during the trip",
                 "type": "radio",
-                "options": ["I would like to not be left alone at all, unless I specifically say so", "I dont care too much if the trip sitter goes away to buy food or something, but I will communicate if I change my mind", "I am very fine with being alone, maybe I even want that. I know that I can always ask the trip sitter for company", "i dont know"],
+                "options": ["I would like to not be left alone at all, unless I specifically say so", "I dont care too much if the trip sitter goes away to grab something to eat, but I will communicate if I change my mind", "I am very fine with being alone, maybe I even want that. I know that I can always ask the trip sitter for company", "i dont know"],
             },
             {
                 "key": "touch",
-                "label": "How comfortable are you with touch? (hand holding, hugging, putting a hand on the body weightfully) (It can have therapeutic potential, but must be handeld carefully)",
+                "label": "How comfortable are you with touch? (hand holding, hugging, putting a hand on the body weightfully) (It can have great therapeutic potential, but only if handeld right)",
                 "type": "radio",
                 "options": ["I dont like being touched at all, unless I specifically say so", "I am okay with touch, if it feels right in the moment. I know I can communicate in both directions", "I enjoy this kind of touch. I will communicate if I dont like something.", "i dont know"],
             },  

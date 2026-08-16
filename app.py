@@ -238,7 +238,9 @@ def render_thank_you() -> None:
         file_name="my_answers.json",
         mime="application/json",
     )
-    #st.button("Fill in another response", on_click=start_over)
+    
+    
+    st.button("Finish and logout", on_click=log_out)
 
 
 # --------------------------------------------------------------------------
