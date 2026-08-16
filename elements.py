@@ -80,7 +80,7 @@ PAGES = [
         "elements": [
 
             {"type": "markdown", "label": """## On the day — preparations"""},
-            {"type": "markdown", "label": """A psilocybin trip lasts around 4-6 hours."""},
+            {"type": "markdown", "label": """A psilocybin trip lasts around **4-6 hours.**"""},
 
             {"type": "markdown", "label": """**Your head:**
 
