@@ -16,7 +16,7 @@ A question is a dict with:
 PAGES = [
     {
         "title": "Briefing",
-        "intro": "So you want to trip on mushrooms or consider it. If you get the substances from me (Lisa), I am not gonna let you do it without that being informed, safe, meaningful and hopefully somewhat beneficial for you.",
+        "intro": "So you want to trip on mushrooms or consider it. If I am the trip sitter, I am not gonna let you do it without that being informed, safe, meaningful and hopefully somewhat beneficial for you.",
         "elements": [
             {
                 "key": "readiness1",
