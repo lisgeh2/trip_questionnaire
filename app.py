@@ -1,4 +1,4 @@
-"""A small questionnaire app: log in, answer three pages, submit.
+"""A small elementnaire app: log in, answer three pages, submit.
 
 Run it with:
 
@@ -13,12 +13,11 @@ import streamlit as st
 
 import auth
 import storage
-from questions import PAGES, all_questions, question_keys
-
+from elements import PAGES, all_elements, element_keys, is_input
 # Every answer is stored in st.session_state under this prefix, e.g. "q_age".
 ANSWER_PREFIX = "q_"
 
-st.set_page_config(page_title="Questionnaire", page_icon="📝")
+st.set_page_config(page_title="Pre-Trip elementnaire", page_icon="📝")
 
 
 # --------------------------------------------------------------------------
@@ -31,10 +30,10 @@ def init_state() -> None:
     st.session_state.setdefault("submitted", False)
 
     # Sliders need a starting position; the other widgets are happy empty.
-    for question in all_questions():
-        if question["type"] == "slider":
-            default = question.get("default", question["min"])
-            st.session_state.setdefault(ANSWER_PREFIX + question["key"], default)
+    for element in all_elements():
+        if element["type"] == "slider":
+            default = element.get("default", element["min"])
+            st.session_state.setdefault(ANSWER_PREFIX + element["key"], default)
 
 
 def keep_answers_alive() -> None:
@@ -49,8 +48,8 @@ def keep_answers_alive() -> None:
 
 
 def collect_answers() -> dict:
-    """All answers as a plain dict: {question key: value}."""
-    return {key: st.session_state.get(ANSWER_PREFIX + key) for key in question_keys()}
+    """All answers as a plain dict: {element key: value}."""
+    return {key: st.session_state.get(ANSWER_PREFIX + key) for key in element_keys()}
 
 
 def is_answered(value) -> bool:
@@ -59,12 +58,13 @@ def is_answered(value) -> bool:
 
 
 def missing_on_page(page: dict) -> list[str]:
-    """Labels of the required questions on this page that are still empty."""
+    """Labels of the required elements on this page that are still empty."""
     return [
-        question["label"]
-        for question in page["questions"]
-        if question.get("required", True)
-        and not is_answered(st.session_state.get(ANSWER_PREFIX + question["key"]))
+        element["label"]
+        for element in page["elements"]
+        if is_input(element)
+        and element.get("required", True)
+        and not is_answered(st.session_state.get(ANSWER_PREFIX + element["key"]))
     ]
 
 
@@ -133,27 +133,44 @@ def render_sidebar() -> None:
         st.caption(f"Answers are saved to `{storage.DATA_FILE}`")
 
 
-def render_question(question: dict) -> None:
-    """Draw one widget. Its value lives in session_state under `key`."""
-    key = ANSWER_PREFIX + question["key"]
-    label = question["label"]
-    kind = question["type"]
+
+DISPLAY_TYPES = {"image", "video", "markdown", "divider"}
+
+def render_element(element: dict) -> None:
+    """Draw one element. Input values live in session_state under `key`."""
+
+    kind = element["type"]
+    label = element.get("label", "")
+    key = ANSWER_PREFIX + element["key"] if is_input(element) else None
 
     if kind == "text":
         st.text_input(label, key=key)
     elif kind == "textarea":
         st.text_area(label, key=key)
     elif kind == "radio":
-        st.radio(label, question["options"], index=None, key=key)
+        st.radio(label, element["options"], index=None, key=key)
     elif kind == "multiselect":
-        st.multiselect(label, question["options"], key=key)
+        st.multiselect(label, element["options"], key=key)
     elif kind == "slider":
-        st.slider(label, question["min"], question["max"], key=key)
+        st.slider(label, element["min"], element["max"], key=key)
+    elif kind == "image":
+        st.image(f"images/{element['src']}", caption=label or None,
+                 width=element.get("width"))
+    elif kind == "video":
+        st.video(element["url"], start_time=element.get("start", 0),
+                 end_time=element.get("end"))
+        if label:
+            st.caption(label)
+    elif kind == "markdown":
+        st.markdown(label)
+    elif kind == "divider":
+        st.divider()
     else:
-        raise ValueError(f"Unknown question type: {kind!r}")
+        raise ValueError(f"Unknown element type: {kind!r}")
 
 
-def render_questionnaire() -> None:
+
+def render_elementnaire() -> None:
     index = st.session_state.page_index
     page = PAGES[index]
     is_last_page = index == len(PAGES) - 1
@@ -163,8 +180,8 @@ def render_questionnaire() -> None:
     if page.get("intro"):
         st.write(page["intro"])
 
-    for question in page["questions"]:
-        render_question(question)
+    for element in page["elements"]:
+        render_element(element)
 
     st.divider()
     left, right = st.columns(2)
@@ -223,7 +240,7 @@ def render_thank_you() -> None:
         file_name="my_answers.json",
         mime="application/json",
     )
-    st.button("Fill in another response", on_click=start_over)
+    #st.button("Fill in another response", on_click=start_over)
 
 
 # --------------------------------------------------------------------------
@@ -234,15 +251,15 @@ def main() -> None:
     init_state()
     keep_answers_alive()
 
-    if st.session_state.username is None:
-        login_screen()
-        return
+    # if st.session_state.username is None:
+    #     login_screen()
+    #     return
 
     render_sidebar()
     if st.session_state.submitted:
         render_thank_you()
     else:
-        render_questionnaire()
+        render_elementnaire()
 
 
 main()

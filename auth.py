@@ -1,9 +1,10 @@
 """A minimal username / password check.
 
-Passwords are never stored in plain text: users.json only holds a random salt
-and a SHA-256 hash. That is fine for an internal survey. For anything exposed
-to the internet, use a real identity provider (SSO, OAuth, Authelia, ...) or
-the `streamlit-authenticator` package.
+Passwords are stored in plain text: users.json holds the password exactly as
+typed. That is fine for a throwaway internal tool where the accounts guard
+nothing of value. For anything exposed to the internet, or if any user might
+reuse a password from elsewhere, use a real identity provider (SSO, OAuth,
+Authelia, ...) or the `streamlit-authenticator` package.
 
 Add a user from the command line:
 
@@ -12,10 +13,7 @@ Add a user from the command line:
 
 from __future__ import annotations
 
-import hashlib
-import hmac
 import json
-import secrets
 import sys
 from getpass import getpass
 from pathlib import Path
@@ -24,12 +22,7 @@ USERS_FILE = Path(__file__).parent / "users.json"
 
 # Created automatically the first time the app starts, so you can log in
 # straight away. Delete it (or the user) once you have added real accounts.
-DEMO_USER = ("demo", "demo1234")
-
-
-def _hash_password(password: str, salt: str) -> str:
-    """Salted SHA-256 hash of a password."""
-    return hashlib.sha256((salt + password).encode("utf-8")).hexdigest()
+DEMO_USER = ("demo", "demo123")
 
 
 def load_users() -> dict:
@@ -42,8 +35,7 @@ def load_users() -> dict:
 def add_user(username: str, password: str) -> None:
     """Add or overwrite a user in users.json."""
     users = load_users()
-    salt = secrets.token_hex(16)
-    users[username] = {"salt": salt, "hash": _hash_password(password, salt)}
+    users[username] = {"password": password}
     USERS_FILE.write_text(json.dumps(users, indent=2), encoding="utf-8")
 
 
@@ -58,12 +50,12 @@ def check_credentials(username: str, password: str) -> bool:
     user = load_users().get(username)
     if user is None:
         return False
-    expected = _hash_password(password, user["salt"])
-    # compare_digest avoids leaking information through timing differences.
-    return hmac.compare_digest(user["hash"], expected)
+    return user["password"] == password
 
 
 if __name__ == "__main__":
+    users = load_users()
+    print(users.get("demo"))
     if len(sys.argv) != 3 or sys.argv[1] != "add":
         print("usage: python auth.py add <username>")
         raise SystemExit(1)

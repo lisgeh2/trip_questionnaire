@@ -1,6 +1,11 @@
 {
   "demo": {
-    "salt": "abed2db1c61cfacea49898718d167dfc",
-    "hash": "0a999c97daeda4b23dd22b52a1521a9c24775a4a0df6c6f08cc82c4c32d8a250"
+    "password": "demo123"
+  },
+  "lisa": {
+    "password": "lisa123"
+  },
+  "anna": {
+    "password": "anna123"
   }
 }
