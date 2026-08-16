@@ -130,8 +130,6 @@ def render_sidebar() -> None:
         answers = collect_answers()
         done = sum(is_answered(value) for value in answers.values())
         st.progress(done / len(answers), text=f"{done} of {len(answers)} answered")
-        st.caption(f"Answers are saved to `{storage.DATA_FILE}`")
-
 
 
 DISPLAY_TYPES = {"image", "video", "markdown", "divider"}
@@ -251,9 +249,9 @@ def main() -> None:
     init_state()
     keep_answers_alive()
 
-    # if st.session_state.username is None:
-    #     login_screen()
-    #     return
+    if st.session_state.username is None:
+        login_screen()
+        return
 
     render_sidebar()
     if st.session_state.submitted:
