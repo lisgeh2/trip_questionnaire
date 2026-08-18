@@ -17,7 +17,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-DATA_FILE = Path(__file__).parent / "data" / "responses.jsonl"
+DATA_FILE = Path(__file__).parent / "full_database" / "data" / "responses.jsonl"
 
 
 def save_response(username: str, answers: dict) -> Path:
@@ -28,7 +28,9 @@ def save_response(username: str, answers: dict) -> Path:
         "username": username,
         "submitted_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "answers": answers,
+        # Add a unique token here, make by these 3
     }
+    
     with DATA_FILE.open("a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 

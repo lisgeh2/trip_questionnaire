@@ -1,18 +1,3 @@
-"""The questionnaire itself.
-
-Everything the survey asks lives here, so you can change the elements without
-touching any Streamlit code.
-
-A question is a dict with:
-    key      unique id -- also the field name in the saved answers
-    label    the text shown to the user
-    type     "text" | "textarea" | "radio" | "multiselect" | "slider"
-    options  list of choices          (radio / multiselect only)
-    min/max  bounds                   (slider only)
-    default  starting position        (slider only, defaults to `min`)
-    required whether it must be filled in (default: True)
-"""
-
 PAGES = [
     {
         "title": "Briefing",
@@ -381,22 +366,3 @@ This is a decision you are making for yourself. I will do what I can to make it 
     },
     
 ]
-
-
-DISPLAY_TYPES = {"image", "video", "markdown", "divider"}
-
-
-def is_input(element) -> bool:
-    return element["type"] not in DISPLAY_TYPES
-
-
-def all_elements():
-    return [element for page in PAGES for element in page["elements"]]
-
-
-def input_elements():
-    return [element for element in all_elements() if is_input(element)]
-
-
-def element_keys():
-    return [element["key"] for element in input_elements()]

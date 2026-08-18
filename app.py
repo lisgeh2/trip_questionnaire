@@ -13,7 +13,7 @@ import streamlit as st
 
 import auth
 import storage
-from elements import PAGES, all_elements, element_keys, is_input
+from full_database.process_meta import PAGES, all_elements, element_keys, is_input
 # Every answer is stored in st.session_state under this prefix, e.g. "q_age".
 ANSWER_PREFIX = "q_"
 
@@ -120,8 +120,8 @@ def render_sidebar() -> None:
         # and clicking "Next" end up doing exactly the same thing.
         st.radio(
             "Pages",
-            options=range(len(PAGES)),
-            format_func=lambda i: f"{i + 1}. {PAGES[i]['title']}",
+            options=range(len(FRABO)),
+            format_func=lambda i: f"{i + 1}. {FRABO[i]['title']}",
             key="page_index",
             disabled=st.session_state.submitted,
         )
