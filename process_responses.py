@@ -119,16 +119,24 @@ def sensitvity_dose_factor(username = "anna"):
     data_amount = 0
     
     #which sensitivities?
-    if user_record["answers"]["weed_experience"] == "yes":
+    if user_record["answers"]["weed_experience"] in ["yes, a little", "yes, a lot"]:
         list_of_sensitivity_items.append("weed_sensitivity")
         data_amount+=1
         
-    if user_record["answers"]["psych_experience"] == "yes":
+    if user_record["answers"]["psych_experience"] in ["yes, a lot"]:
         list_of_sensitivity_items.append("psych_sensitivity")
         list_of_sensitivity_items.append("psych_sensitivity")
         list_of_sensitivity_items.append("psych_sensitivity")
         list_of_sensitivity_items.append("psych_sensitivity")
-        data_amount+=4
+        list_of_sensitivity_items.append("psych_sensitivity")
+        data_amount+=6
+        
+    if user_record["answers"]["psych_experience"] in ["yes, a little"]:
+        list_of_sensitivity_items.append("psych_sensitivity")
+        list_of_sensitivity_items.append("psych_sensitivity")
+        list_of_sensitivity_items.append("psych_sensitivity")
+        list_of_sensitivity_items.append("psych_sensitivity")
+        data_amount+=3
         
     list_of_sensitivity_items.append("other_sensitivity")
     list_of_sensitivity_items.append("other_sensitivity")
