@@ -1,6 +1,9 @@
 from colors import FARBEN_4_ABSTUFUNGEN
+from config import STYLE
 
-GLOBAL = """
+def give_global_css():
+    if STYLE == "gfs":
+        return """
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=DM+Sans:wght@400;500;600&display=swap');
