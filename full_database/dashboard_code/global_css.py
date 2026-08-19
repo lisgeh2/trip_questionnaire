@@ -131,3 +131,4 @@ width: 100%;
 }
 </style>
 """
+GLOBAL = give_global_css()

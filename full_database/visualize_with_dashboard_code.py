@@ -7,7 +7,7 @@
 #  Starten:       streamlit run
 # ============================================================
 
-import config
+from dashboard_code.config import STYLE
 import os
 from pathlib import Path
 import pyreadstat
@@ -39,10 +39,32 @@ from process_df import build_df
 from process_meta import transform_to_meta, DONT_KNOW
 cards = CardHandler()
 
-
 @st.cache_data
-df = build_df()
-meta = transform_to_meta()
+def load_data():
+    HERE = Path(__file__).parent
+    sav_path = HERE / "dashboard_code" / "fertig_all_waves_UV_RANDOM.sav"
+    print("Looking for:", sav_path)
+    print("Exists?", sav_path.exists())
+    df, meta = pyreadstat.read_sav(str(HERE / "fertig_all_waves_UV_RANDOM.sav"))
+    return df, meta
+
+df, meta = load_data()
+
+# define weighting and your environment in the config.py file
+
+
+
+# Nur wenn man im gfs environment ist, und zugang auf den Hintergrund-Code hat, kann man den metatable laden.
+# Wenn man das nicht hat, muss man eine (broken) eigenfunktion verwenden, welche die Labels über meta holt. (siehe HandleMeta)
+# Dort kann man auch IN_GFS auf True oder False setzen
+
+
+df, meta = pyreadstat.read_sav("fertig_all_waves_UV_RANDOM.sav")
+#####################################
+
+# @st.cache_data
+# df = build_df()
+# meta = transform_to_meta()
 
 
 # ── SEITEN-KONFIGURATION ────────────────────────────────────
@@ -95,7 +117,7 @@ b1, b2 = st.columns([1.5, 2.5])
 with b1:
     with st.container(key="karte2"):
         h.set_subtle_title(st, "GFS1_1", "Mittelwerte nach Break")
-        st.subheader(HandleMeta.get_column_label(meta, "GFS1_1"))
+        st.subheader(dashboard_code.HandleMeta.get_column_label(meta, "GFS1_1"))
 
         break_options = {
             "Kein Break": "tz",
@@ -158,7 +180,7 @@ n2_1, n2_2 = b2.columns([1, 1])
 
 with b2_1.container(key="karte6"):
     h.set_subtle_title(st, "GFS2_1", "Stacked Barchart")
-    st.subheader(HandleMeta.get_column_label(meta, "GFS2_1"))
+    st.subheader(dashboard_code.HandleMeta.get_column_label(meta, "GFS2_1"))
     fig = create_stacked_bar(df, meta, "GFS2_1", height=140)
     st.plotly_chart(fig, use_container_width=True)
     h.set_sample_size(st, col="GFS2_1", meta=meta, df=df)
@@ -170,7 +192,7 @@ h1, h2 = st.columns([1, 1])
 
 with h1.container(key="karte8"):
     h.set_subtle_title(st, "GFS2_3", "Stacked Barchart")
-    st.subheader(HandleMeta.get_column_label(meta, "GFS2_3"))
+    st.subheader(dashboard_code.HandleMeta.get_column_label(meta, "GFS2_3"))
     min_age, max_age = st.slider(
         "Gemeindegrösse wählen",
         min_value=int(df["gemeinde_gr_break"].min()),
