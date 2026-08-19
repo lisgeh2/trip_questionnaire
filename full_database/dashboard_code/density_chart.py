@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 import HandleMeta
-from colors import GFS_BLUE, FARBEN_4_ABSTUFUNGEN
+from colors import CORE_COLOR, FARBEN_4_ABSTUFUNGEN
 import plotly.graph_objects as go
 from typing import Optional, Union
 from helpers import hex_to_rgba, clean_plot_array, clean_value_labels

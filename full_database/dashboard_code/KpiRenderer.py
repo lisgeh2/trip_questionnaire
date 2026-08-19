@@ -1,5 +1,5 @@
 import streamlit as st
-from colors import C_LIST
+from colors import MULTIPLE_COLORS
 
 
 class KpiRenderer:
@@ -24,7 +24,7 @@ class KpiRenderer:
             arrow = "↓ "
         fazit_text = f"{arrow}{fazit_text}"
 
-        color = C_LIST[self.call_count % len(C_LIST)]
+        color = MULTIPLE_COLORS[self.call_count % len(MULTIPLE_COLORS)]
         self.call_count += 1
 
         area.markdown(

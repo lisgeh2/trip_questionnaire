@@ -8,28 +8,6 @@ from os.path import commonprefix
 
 HERE = Path(__file__).parent
 
-def load_local_thing(path="MetaTable.pkl"):
-    full_path = HERE / path   # always resolves next to the script
-
-    @contextmanager
-    def _temp_syspath(p):
-        p = str(p)
-        sys.path.insert(0, p)
-        try:
-            yield
-        finally:
-            sys.path.remove(p)
-
-    _functions_parent = Path(__file__).parents[6]
-
-    with _temp_syspath(_functions_parent):
-        if str(full_path).endswith(".pkl"):
-            with open(full_path, "rb") as f:
-                return pickle.load(f)
-        elif str(full_path).endswith(".sav"):
-            return pyreadstat.read_sav(str(full_path))
-        else:
-            raise ValueError(f"Unsupported file type: {path}")
 
 def get_value_labels(meta, variable_name):
     if IN_GFS:

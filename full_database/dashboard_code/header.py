@@ -1,5 +1,5 @@
 from html import escape
-from colors import C, GFS_BLUE, FARBEN_4_ABSTUFUNGEN
+from colors import MULTIPLE_COLORS, CORE_COLOR, FARBEN_4_ABSTUFUNGEN
 import base64
 
 
@@ -59,8 +59,8 @@ font-size: 0.72rem;
 font-weight: 700;
 letter-spacing: 0.12em;
 text-transform: uppercase;
-color: {GFS_BLUE[0]};
-background: {GFS_BLUE[9]};
+color: {CORE_COLOR[0]};
+background: {CORE_COLOR[9]};
 padding: 7px 12px;
 border-radius: 999px;
 margin-bottom: 14px;

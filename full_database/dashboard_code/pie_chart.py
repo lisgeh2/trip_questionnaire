@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.express as px
 import HandleMeta
-from colors import C_LIST
+from colors import MULTIPLE_COLORS
 from crunch_label import give_crunch_label
 from typing import Literal, Optional, Union
 from helpers import clean_value_labels
@@ -36,7 +36,7 @@ def create_piechart(
             names=labels_list,
             values=counts,
             hole=hole,
-            color_discrete_sequence=C_LIST,
+            color_discrete_sequence=MULTIPLE_COLORS,
         )
 
     fig.update_traces(

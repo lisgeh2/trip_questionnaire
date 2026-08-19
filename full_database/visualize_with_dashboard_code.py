@@ -14,7 +14,7 @@ import pyreadstat
 import streamlit as st
 from streamlit_extras.stylable_container import stylable_container
 import numpy as np
-from dashboard_code.colors import C_LIST, GFS_BLUE, CREME_FARBE
+from dashboard_code.colors import MULTIPLE_COLORS, CORE_COLOR, BACKGROUND
 from dashboard_code.global_css import GLOBAL
 from dashboard_code.header import header
 import dashboard_code.helpers as h
@@ -25,7 +25,7 @@ from dashboard_code.single_barchart import create_barchart
 from dashboard_code.stacked_barchart import create_stacked_bar
 from dashboard_code.density_chart import create_density_plot
 from dashboard_code.multi_stacked_barchart import create_multi_stacked_barchart
-import HandleMeta
+import dashboard_code.HandleMeta
 from dashboard_code.HandleMeta import load_local_thing
 from dashboard_code.config import WEIGHTING
 import altair as alt
@@ -55,7 +55,7 @@ st.set_page_config(
 # ── GLOBALES CSS ─────────────────────────────────────────────
 st.markdown(GLOBAL, unsafe_allow_html=True)
 
-st.markdown(h.set_background(hex_color=CREME_FARBE[1]), unsafe_allow_html=True)
+st.markdown(h.set_background(hex_color=BACKGROUND[1]), unsafe_allow_html=True)
 
 # ── HEADER ──────────────────────────────────────────────────
 st.markdown(

@@ -14,7 +14,7 @@ import pyreadstat
 import streamlit as st
 from streamlit_extras.stylable_container import stylable_container
 import numpy as np
-from colors import C_LIST, GFS_BLUE, CREME_FARBE
+from colors import MULTIPLE_COLORS, CORE_COLOR, BACKGROUND
 from global_css import GLOBAL
 from header import header
 import helpers as h
@@ -27,7 +27,7 @@ from density_chart import create_density_plot
 from multi_stacked_barchart import create_multi_stacked_barchart
 import HandleMeta
 from HandleMeta import load_local_thing
-from config import IN_GFS, WEIGHTING
+from config import WEIGHTING
 import altair as alt
 from pie_chart import create_piechart
 from big_number import big_number
@@ -36,12 +36,6 @@ import plotly.express as px
 from card_handler import CardHandler
 from crunch_label import give_crunch_label
 cards = CardHandler()
-print("=" * 60)
-print("IN_GFS =", repr(IN_GFS), "type:", type(IN_GFS), "bool:", bool(IN_GFS))
-import config
-print("environment module loaded from:", config.__file__)
-print("environment.IN_GFS =", repr(config.IN_GFS))
-print("=" * 60)
 
 
 @st.cache_data
@@ -83,7 +77,7 @@ st.set_page_config(
 # ── GLOBALES CSS ─────────────────────────────────────────────
 st.markdown(GLOBAL, unsafe_allow_html=True)
 
-st.markdown(h.set_background(hex_color=CREME_FARBE[1]), unsafe_allow_html=True)
+st.markdown(h.set_background(hex_color=BACKGROUND[1]), unsafe_allow_html=True)
 
 # ── HEADER ──────────────────────────────────────────────────
 st.markdown(

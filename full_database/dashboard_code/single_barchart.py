@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.express as px
 import HandleMeta
-from colors import C_LIST, C, BINAER_VERLAUF, BINAER_VERLAUF_OPPOSITE
+from colors import MULTIPLE_COLORS, C, BINAER_VERLAUF, BINAER_VERLAUF_OPPOSITE
 from crunch_label import give_crunch_label
 from typing import Literal, Optional, Union
 from helpers import clean_plot_array, clean_value_labels
@@ -138,7 +138,7 @@ def handle_horizontal(x, y, horizontal):
 def handle_color(color, color_gradient, values, num_categories):
     # Default Fallback
     color_continuous_scale = None
-    color_discrete_sequence = [C[color]]
+    color_discrete_sequence = [MULTIPLE_COLORS[color]]
     color_arg = None
     marker = None
     showlegend = False

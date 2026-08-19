@@ -1,4 +1,4 @@
-from colors import C_LIST, GFS_BLUE, CREME_FARBE, FARBEN_4_ABSTUFUNGEN, FARBEN_4
+from colors import MULTIPLE_COLORS, CORE_COLOR, BACKGROUND, FARBEN_4_ABSTUFUNGEN, FARBEN_4
 
 
 def big_number(area, column, column_text, number, text, color="rot", add_percent=True, height = None):
