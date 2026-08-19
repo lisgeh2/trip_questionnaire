@@ -9,11 +9,6 @@ from ai_usage import give_interaction_safety_rating, give_interaction_safety_tex
 
 # wennd ned willsch jedesmal die person ageh: ine klass tue miteme Token
 
-# average and spread of the 3-item absorption score in the general population.
-# ABSORPTION_SD is a guess - replace it if you have the real number.
-ABSORPTION_MEAN = 2.389705
-ABSORPTION_SD = 0.9
-
 responses = [
     json.loads(line)
     for line in DATA_FILE.read_text(encoding="utf-8").splitlines()
@@ -40,22 +35,22 @@ def calculate_average(list_of_vars, token="0dbf99c72f98247392b90464ec3eb13a90f82
             list_of_vars_int.append(answer)
     # We ignore Nones:
     list_of_vars_int = [answer for answer in list_of_vars_int if answer is not None]
-
+    
     return mean(list_of_vars_int)
 
 
 def absorption_text(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1fe327fc91"):
     avg_absorption = calculate_average(["absorption1", "absorption2", "absorption3"], token = token)
-    z_value = (avg_absorption-ABSORPTION_MEAN)/ABSORPTION_SD
-    percentile = NormalDist().cdf(z_value)
+    z_value = (avg_absorption*2.389705)/25
+    percentile = NormalDist().cdf(z_value) 
     text = ""
-    if percentile<0.40:
+    if percentile>40:
         text = "You have below average trait absorption."
-    elif percentile<0.60:
+    elif percentile>60:
         text = "You're pretty average in trait absorption!"
     else:
         text = "You have pretty high trait absorption!"
-
+    
        # 0.9331927987311419  → 93.3rd percentile
 
     return f"""{text} You scored roughly at {round(percentile*100, 1)} percentile"""
@@ -69,13 +64,13 @@ def readiness_int(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1
 
 
 def readiness_text(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1fe327fc91"):
-    readiness=readiness_int(token)
+    readiness=readiness_int()
     if readiness == 0:
         return "stayed the same."
     elif readiness > 0:
         return f"has increased by {readiness}. Yay!"
     elif readiness < 0:
-        return f"has decreased by {abs(readiness)}... sorry lol."
+        return f"has decreased by {readiness}... sorry lol."
 
 def give_screening_result(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1fe327fc91"):
     reasons = ""
@@ -86,11 +81,12 @@ def give_screening_result(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef
         if user_record["answers"][item] == "yes":
             screening_result="no"
             reasons += f"You answered yes to {item}"
-
+    
     if user_record["answers"]["meds_interaction"] == "yes" and screening_result == "ok":
         med_text = user_record["answers"]["meds_interaction_text"]
         safety_number = give_interaction_safety_rating(med_text)
-
+        print(safety_number)
+        
         if safety_number > 7:
             screening_result = "ok"
             reasons += give_interaction_safety_text(med_text)
@@ -125,15 +121,15 @@ def absorption_dose_factor(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fe
 
 def sensitvity_dose_factor(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1fe327fc91"):
     user_record = next(r for r in responses if r["token"] == token)
-
+    
     list_of_sensitivity_items = []
     data_amount = 0
-
+    
     #which sensitivities?
     if user_record["answers"]["weed_experience"] in ["yes, a little", "yes, a lot"]:
         list_of_sensitivity_items.append("weed_sensitivity")
         data_amount+=1
-
+        
     if user_record["answers"]["psych_experience"] in ["yes, a lot"]:
         list_of_sensitivity_items.append("psych_sensitivity")
         list_of_sensitivity_items.append("psych_sensitivity")
@@ -141,44 +137,44 @@ def sensitvity_dose_factor(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fe
         list_of_sensitivity_items.append("psych_sensitivity")
         list_of_sensitivity_items.append("psych_sensitivity")
         data_amount+=6
-
+        
     if user_record["answers"]["psych_experience"] in ["yes, a little"]:
         list_of_sensitivity_items.append("psych_sensitivity")
         list_of_sensitivity_items.append("psych_sensitivity")
         list_of_sensitivity_items.append("psych_sensitivity")
         list_of_sensitivity_items.append("psych_sensitivity")
         data_amount+=3
-
+        
     list_of_sensitivity_items.append("other_sensitivity")
     list_of_sensitivity_items.append("other_sensitivity")
     data_amount+=2
 
     absorption_avg = calculate_average(list_of_sensitivity_items, token = token)
-
+    
     standardized = (absorption_avg-5)/10
     standardized = standardized*-1 #because more sensitivity menas less dosing
-
+    
     # maximally it can go 0.5 down or 0.5 up
     # so if you wanna take 1.9 g -> 0.85g down or up
-
+    
     weighting = 0.09 + (0.03*data_amount)
-
+    
     factor = weighting*standardized
     return factor
-
+    
 
 
 def weight_dose_factor(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1fe327fc91"):
     user_record = next(r for r in responses if r["token"] == token)
     body_weight = int(user_record["answers"]["body_weight"])
-    standardized = (body_weight-71)/71
+    standardized = (body_weight-71)/71    
     weighting = 0.15
     factor = weighting*standardized
     return factor
 
 def give_final_dosing(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1fe327fc91"):
     base_dose = give_base_dose(token)
-    return base_dose+(base_dose*sensitvity_dose_factor(token))+(base_dose*absorption_dose_factor(token))+(base_dose*weight_dose_factor(token))
+    return base_dose+(base_dose*sensitvity_dose_factor())+(base_dose*absorption_dose_factor())+(base_dose*weight_dose_factor())
 
 
 def give_screening_hex(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1fe327fc91"):
@@ -193,12 +189,12 @@ def give_screening_hex(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef481
 def give_screening_image(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1fe327fc91"):
     result, text = give_screening_result(token)
     if result == "ok":
-        return "images/screening_ok.png"
+        return "images/screening_yes.png"
     elif result == "maybe":
         return "images/screening_maybe.png"
     else:
         return "images/screening_no.png"
-
+    
 
 if __name__ == "__main__":
     print(calculate_average(["absorption1", "absorption2", "absorption3"]))
@@ -212,3 +208,5 @@ if __name__ == "__main__":
     print(1.9+(1.9*sensitvity_dose_factor())+(1.9*absorption_dose_factor()))
     print(1.9+(1.9*weight_dose_factor()))
     print(give_final_dosing())
+
+

@@ -20,22 +20,34 @@ from pathlib import Path
 DATA_FILE = Path(__file__).parent / "full_database" / "data" / "responses.jsonl"
 
 
+import hashlib
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+
 def save_response(username: str, answers: dict) -> Path:
     """Append one submission and return the file it was written to."""
     DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
 
+    submitted_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+    # Build token from username + submitted_at + all answers
+    token_data = {"username": username, "submitted_at": submitted_at, "answers": answers}
+    token_string = json.dumps(token_data, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    token = hashlib.sha256(token_string.encode("utf-8")).hexdigest()
+
     record = {
         "username": username,
-        "submitted_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "submitted_at": submitted_at,
+        "token": token,
         "answers": answers,
-        # Add a unique token here, make by these 3
     }
-    
+
     with DATA_FILE.open("a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
     return DATA_FILE
-
 
 def load_responses() -> list[dict]:
     """All submissions so far, oldest first."""

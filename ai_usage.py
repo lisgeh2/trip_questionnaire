@@ -22,10 +22,9 @@ def give_interaction_safety_rating(med):
         ],
     )
     
-    return message.content[0].text
+    return int(message.content[0].text)
 
 def give_interaction_safety_text(med):
-   
     message = client.messages.create(
         model="claude-haiku-4-5-20251001",
         max_tokens=1024,
@@ -35,7 +34,10 @@ def give_interaction_safety_text(med):
         ],
     )
     
-    return message.content[0].tex
+    return message.content[0].text    
+
+
+
 
 if __name__ == "__main__":
     print(give_interaction_safety_text("lithium"))

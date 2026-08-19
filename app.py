@@ -120,8 +120,8 @@ def render_sidebar() -> None:
         # and clicking "Next" end up doing exactly the same thing.
         st.radio(
             "Pages",
-            options=range(len(FRABO)),
-            format_func=lambda i: f"{i + 1}. {FRABO[i]['title']}",
+            options=range(len(PAGES)),
+            format_func=lambda i: f"{i + 1}. {PAGES[i]['title']}",
             key="page_index",
             disabled=st.session_state.submitted,
         )
