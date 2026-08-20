@@ -23,6 +23,17 @@ def give_multiple_colors():
                 "#7c88a8",  # grau – cool grey
                 "#ff6b1a",  # orange (statt paper)
                 ]
+    if STYLE == "leavy":
+        return [
+                "#38623f",  # gruen – Waldgruen (Core)
+                "#8c3b2e",  # rot – Terrakotta
+                "#3f5e78",  # blau – Schiefer
+                "#b0862e",  # gelb – Ocker
+                "#6b4a2f",  # braun – Rinde
+                "#22201b",  # tinte (dunkel)
+                "#8ea182",  # gruen-grau – Flechte (grau)
+                "#ddd0b4",  # pergament (paper)
+                ]
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_core_color():
@@ -54,6 +65,20 @@ def give_core_color():
     "#ff2d951A",  # 90% transparenz / 10% sichtbar
     "#ff2d9500",  # 100% transparenz / 0% sichtbar
     ]
+    if STYLE == "leavy":
+        return [
+    "#38623f",    # 0% transparenz / 100% sichtbar
+    "#38623fE6",  # 10% transparenz / 90% sichtbar
+    "#38623fCC",  # 20% transparenz / 80% sichtbar
+    "#38623fB3",  # 30% transparenz / 70% sichtbar
+    "#38623f99",  # 40% transparenz / 60% sichtbar
+    "#38623f80",  # 50% transparenz / 50% sichtbar
+    "#38623f66",  # 60% transparenz / 40% sichtbar
+    "#38623f4D",  # 70% transparenz / 30% sichtbar
+    "#38623f33",  # 80% transparenz / 20% sichtbar
+    "#38623f1A",  # 90% transparenz / 10% sichtbar
+    "#38623f00",  # 100% transparenz / 0% sichtbar
+    ]
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_background():
@@ -61,7 +86,10 @@ def give_background():
         return ["#f4f0e4", "#ece5d2", "#6e685b", "#14130f"]
     if STYLE == "cool_black":
         # [0] Karten-Fläche, [1] Seiten-Hintergrund, [2] Linien/Trenner, [3] Text hell
-        return ["#0b0d14", "#141725", "#171b2b", "#eaf0ff"]
+        return ["#0b0d14", "#05060a", "#171b2b", "#eaf0ff"]
+    if STYLE == "leavy":
+        # [0] Karte, [1] Seiten-Hintergrund, [2] Linien, [3] Tinte
+        return ["#fdfaf3", "#f2ebda", "#d8cdb4", "#22201b"]
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 
@@ -90,6 +118,17 @@ def give_binaer_verlauf_opposite():
     8: ['#00d9ff', '#0ca8ca', '#187895', '#244760', '#482f50', '#852e67', '#c22e7e', '#ff2d95'],
     9: ['#00d9ff', '#0aaed0', '#1584a2', '#205a74', '#2a2f45', '#5f2e59', '#942e6d', '#ca2e81', '#ff2d95'],
     }
+    if STYLE == "leavy":
+        return {
+    2: ['#3f5e78', '#8c3b2e'],
+    3: ['#3f5e78', '#e8dfc8', '#8c3b2e'],
+    4: ['#3f5e78', '#b0b4ad', '#c9a895', '#8c3b2e'],
+    5: ['#3f5e78', '#949ea0', '#e8dfc8', '#ba8d7b', '#8c3b2e'],
+    6: ['#3f5e78', '#839298', '#c6c5b8', '#d6bea9', '#b17d6c', '#8c3b2e'],
+    7: ['#3f5e78', '#778993', '#b0b4ad', '#e8dfc8', '#c9a895', '#ab7261', '#8c3b2e'],
+    8: ['#3f5e78', '#6f838f', '#a0a8a6', '#d0cdbd', '#dbc8b2', '#c19986', '#a66a5a', '#8c3b2e'],
+    9: ['#3f5e78', '#697e8c', '#949ea0', '#bebfb4', '#e8dfc8', '#d1b6a2', '#ba8d7b', '#a36454', '#8c3b2e'],
+    }
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_binaer_verlauf():
@@ -116,6 +155,17 @@ def give_binaer_verlauf():
     8: ['#ff2d95', '#c22e7e', '#852e67', '#482f50', '#244760', '#187895', '#0ca8ca', '#00d9ff'],
     9: ['#ff2d95', '#ca2e81', '#942e6d', '#5f2e59', '#2a2f45', '#205a74', '#1584a2', '#0aaed0', '#00d9ff'],
     }
+    if STYLE == "leavy":
+        return {
+    2: ['#8c3b2e', '#3f5e78'],
+    3: ['#8c3b2e', '#e8dfc8', '#3f5e78'],
+    4: ['#8c3b2e', '#c9a895', '#b0b4ad', '#3f5e78'],
+    5: ['#8c3b2e', '#ba8d7b', '#e8dfc8', '#949ea0', '#3f5e78'],
+    6: ['#8c3b2e', '#b17d6c', '#d6bea9', '#c6c5b8', '#839298', '#3f5e78'],
+    7: ['#8c3b2e', '#ab7261', '#c9a895', '#e8dfc8', '#b0b4ad', '#778993', '#3f5e78'],
+    8: ['#8c3b2e', '#a66a5a', '#c19986', '#dbc8b2', '#d0cdbd', '#a0a8a6', '#6f838f', '#3f5e78'],
+    9: ['#8c3b2e', '#a36454', '#ba8d7b', '#d1b6a2', '#e8dfc8', '#bebfb4', '#949ea0', '#697e8c', '#3f5e78'],
+    }
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_farben_4():
@@ -123,6 +173,8 @@ def give_farben_4():
         return {"grün": "#4c7a3a", "rot": "#b24d24", "blau": "#3c699a", "gelb": "#c48a2a"}
     if STYLE == "cool_black":
         return {"grün": "#3dff8b", "rot": "#ff2d95", "blau": "#00d9ff", "gelb": "#ffd60a"}
+    if STYLE == "leavy":
+        return {"grün": "#38623f", "rot": "#8c3b2e", "blau": "#3f5e78", "gelb": "#b0862e"}
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_farben_4_abstufungen():
@@ -190,6 +242,37 @@ def give_farben_4_abstufungen():
         "basis":      "#ffd60a",
         "dunkel":     "#ffe358",
         "sehr_dunkel":"#fff1ac",
+    },
+    }
+    if STYLE == "leavy":
+        return {
+    "grün": {
+        "sehr_hell":  "#d3d8c9",
+        "hell":       "#99ac96",
+        "basis":      "#38623f",
+        "dunkel":     "#304b32",
+        "sehr_dunkel":"#293527",
+    },
+    "rot": {
+        "sehr_hell":  "#e4d1c6",
+        "hell":       "#c3988d",
+        "basis":      "#8c3b2e",
+        "dunkel":     "#673227",
+        "sehr_dunkel":"#442921",
+    },
+    "blau": {
+        "sehr_hell":  "#d5d8d5",
+        "hell":       "#9caab2",
+        "basis":      "#3f5e78",
+        "dunkel":     "#354857",
+        "sehr_dunkel":"#2b3439",
+    },
+    "gelb": {
+        "sehr_hell":  "#ebe0c6",
+        "hell":       "#d5be8d",
+        "basis":      "#b0862e",
+        "dunkel":     "#7e6227",
+        "sehr_dunkel":"#4f4121",
     },
     }
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")

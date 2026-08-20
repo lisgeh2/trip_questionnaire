@@ -88,6 +88,76 @@ def give_html(color, farben, height_css, flex_css):
     }}
     </style>"""
 
+    if STYLE == "leavy":
+        return f"""<style>
+    .stat-card.accent-{color} {{
+        --card:   #fdfaf3;
+        --rule:   {farben['dunkel']};
+        --accent: {farben['basis']};
+        --text:   {farben['sehr_dunkel']};
+        --muted:  {farben['dunkel']};
+
+        background: var(--card);
+        border: 1px solid var(--rule);
+        border-radius: 0;
+        padding: 2rem 2.25rem 1.75rem 2.25rem;
+        position: relative;
+        overflow: hidden;
+        font-family: "EB Garamond", Georgia, serif;
+        color: var(--text);
+        {height_css};
+        {flex_css};
+        justify-content: center;
+        gap: 0.2rem;
+        box-shadow: inset 0 0 0 1px var(--card),
+                    inset 0 0 0 4px var(--rule),
+                    0 1px 2px rgba(34, 32, 27, 0.10);
+    }}
+    .stat-card.accent-{color}::before {{
+        content: "";
+        position: absolute;
+        top: 18px; left: 50%;
+        transform: translateX(-50%);
+        width: 34px; height: 1px;
+        background: var(--accent);
+        opacity: 0.55;
+    }}
+    .stat-card.accent-{color}::after {{
+        content: "";
+        position: absolute;
+        right: -70px; bottom: -80px;
+        width: 190px; height: 190px;
+        border: 1px solid var(--accent);
+        border-radius: 50%;
+        opacity: 0.10;
+        pointer-events: none;
+    }}
+    .stat-card.accent-{color} .section-title {{
+        color: var(--muted);
+        border-bottom: 1px solid {farben['sehr_hell']};
+        text-align: center;
+        font-size: 0.66rem;
+        letter-spacing: 0.20em;
+    }}
+    .stat-card.accent-{color} .stat-label       {{ color: var(--muted); }}
+    .stat-card.accent-{color} .stat-description {{
+        color: var(--muted);
+        text-align: center;
+        font-style: italic;
+        max-width: 32ch;
+        margin-left: auto;
+        margin-right: auto;
+    }}
+    .stat-card.accent-{color} .percent {{
+        color: var(--accent);
+        font-style: italic;
+    }}
+    .stat-card.accent-{color} .stat-number {{
+        text-align: center;
+        color: var(--accent);
+    }}
+    </style>"""
+
 
 def big_number(area, column, column_text, number, text, color="rot", add_percent=True, height = None):
     farben = FARBEN_4_ABSTUFUNGEN[color]

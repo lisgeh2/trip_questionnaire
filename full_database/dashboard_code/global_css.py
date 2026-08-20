@@ -294,4 +294,180 @@ width: 100%;
 }
 </style>
 """
+    if STYLE == "leavy":
+        return """
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&display=swap');
+
+:root {
+    --bg: #f2ebda;
+    --card: #fdfaf3;
+    --border: #d8cdb4;
+    --rule: #38623f;
+    --text: #22201b;
+    --muted: #6f6552;
+    --accent-red: #8c3b2e;
+    --accent-yellow: #b0862e;
+    --accent-blue: #3f5e78;
+    --accent-green: #38623f;
+}
+
+  html, body, [class*="css"] { font-family: 'EB Garamond', Georgia, serif; }
+  header[data-testid="stHeader"] { display: none; }
+
+  .stApp { background-color: var(--bg); color: var(--text); }
+  .stApp, .stApp p, .stApp li, .stApp label,
+  [data-testid="stMarkdownContainer"] { color: var(--text); }
+
+  .block-container { padding-top: 1.5rem; padding-bottom: 2rem; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    color: var(--text) !important;
+    letter-spacing: -0.01em;
+    font-weight: 600 !important;
+  }
+  h3 { font-size: 1.06rem !important; }
+
+  /* KpiRenderer setzt inline border-top:3px solid {akzent}.
+     Darum hier NUR eine Haarlinie und kein Doppelrahmen - sonst
+     kollidieren die beiden Rahmen wie zwei uebereinandergelegte Passepartouts. */
+  .kpi-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: none;
+    padding: 22px 24px 20px 24px;
+    border-radius: 0; margin-bottom: 4px;
+  }
+  /* Die Akzentfarbe kommt inline aus dem KpiRenderer (border-top:3px).
+     Nur die Breite wird hier ueberschrieben - die Farbe bleibt inline.
+     !important ist noetig, weil Inline-Styles sonst gewinnen. */
+  .kpi-box[style*="border-top"] {
+    border-top-width: 7px !important;
+  }
+  .kpi-label {
+    font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+    padding-bottom: 11px; margin-bottom: 13px;
+    border-bottom: 1px solid var(--border);
+  }
+  .kpi-value {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.35rem; font-weight: 600; color: var(--text);
+    line-height: 1.06; margin-bottom: 11px; letter-spacing: -0.012em;
+  }
+  .kpi-up      { color: var(--accent-green);  font-size: 0.88rem; font-style: italic; }
+  .kpi-neutral { color: var(--muted);         font-size: 0.88rem; font-style: italic; }
+  .kpi-down    { color: var(--accent-red);    font-size: 0.88rem; font-style: italic; }
+
+  .section-title {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.26em;
+    text-transform: uppercase; color: var(--muted);
+    border-bottom: 1px solid var(--border); padding-bottom: 7px; margin: 8px 0 4px;
+  }
+  .sample-size {
+      font-size: 0.80rem;
+      font-style: italic;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: var(--muted);
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+  }
+
+[class*="st-key-karte"] {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 1.6rem;
+    box-shadow: 0 1px 2px rgba(34, 32, 27, 0.08);
+    transition: border-color 0.25s ease;
+}
+[class*="st-key-karte"]:hover {
+    border-color: var(--rule);
+}
+
+[data-baseweb="select"] > div, .stTextInput input, .stNumberInput input {
+    background: var(--card) !important;
+    border-color: var(--border) !important;
+    border-radius: 0 !important;
+    color: var(--text) !important;
+    font-family: 'EB Garamond', Georgia, serif !important;
+}
+[data-testid="stMetricValue"] { color: var(--text); }
+hr, [data-testid="stDivider"] { border-color: var(--border); }
+
+/* Footer */
+footer{padding:40px 0;border-top:1px solid var(--rule);color:var(--muted)}
+
+.footer-logos {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 2.5rem;
+flex-wrap: wrap;
+margin-bottom: 0.5rem;
+}
+
+.footer-logos img {
+height: 70px;
+max-width: 140px;
+object-fit: contain;
+opacity: 0.75;
+filter: grayscale(60%) sepia(18%);
+transition: filter 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-logos img:hover {
+opacity: 1;
+filter: grayscale(0%);
+transform: scale(1.05);
+}
+
+.footer-bottom {
+display: flex;
+justify-content: space-between;
+gap: 1rem;
+flex-wrap: wrap;
+width: 100%;
+}
+
+.stat-label {
+    font-size: 0.70rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.20em;
+    color: var(--muted);
+    margin: 0 0 0.9rem 0;
+}
+
+.stat-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 4.4rem;
+    line-height: 1.02;
+    letter-spacing: -0.012em;
+    margin: 0;
+    color: var(--rule);
+}
+
+.stat-number .percent {
+    font-size: 1.85rem;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--accent-yellow);
+    vertical-align: top;
+    margin-left: 0.08em;
+}
+
+.stat-description {
+    margin: 0.85rem 0 0 0;
+    font-size: 1.06rem;
+    font-style: italic;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+</style>
+"""
 GLOBAL = give_global_css()
