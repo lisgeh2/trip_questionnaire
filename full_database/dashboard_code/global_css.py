@@ -381,12 +381,27 @@ width: 100%;
     border: 1px solid var(--border);
     border-radius: 0;
     padding: 1.6rem;
-    box-shadow: 0 16px 32px -12px rgba(34, 32, 27, 0.40),
-                0 3px 8px rgba(34, 32, 27, 0.16);
-    transition: border-color 0.25s ease;
+    /* Drei Lagen, damit box-shadow beim Hover sauber interpolieren kann:
+       die Innenlinie liegt hier als unsichtbarer Platzhalter bereit. */
+    box-shadow: inset 0 0 0 1px var(--card),
+                inset 0 0 0 0 rgba(56, 98, 63, 0),
+                0 2px 5px rgba(34, 32, 27, 0.10);
+    transition: transform 220ms cubic-bezier(0.2, 0.7, 0.3, 1),
+                box-shadow 220ms cubic-bezier(0.2, 0.7, 0.3, 1),
+                border-color 220ms ease;
 }
 [class*="st-key-karte"]:hover {
     border-color: var(--rule);
+    transform: translateY(-4px);
+    /* Der zweite Rahmen faehrt aus: aus der Karte wird eine Urkunde. */
+    box-shadow: inset 0 0 0 1px var(--card),
+                inset 0 0 0 4px var(--rule),
+                0 18px 34px -12px rgba(34, 32, 27, 0.42),
+                0 4px 10px rgba(34, 32, 27, 0.16);
+}
+@media (prefers-reduced-motion: reduce) {
+    [class*="st-key-karte"] { transition: none; }
+    [class*="st-key-karte"]:hover { transform: none; }
 }
 
 [data-baseweb="select"] > div, .stTextInput input, .stNumberInput input {
@@ -670,6 +685,211 @@ font-size: 0.68rem;
     font-size: 0.72rem;
     line-height: 1.5;
     opacity: 0.78;
+}
+</style>
+"""
+    if STYLE == "black_white":
+        return """
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+:root {
+    --bg: #0a0a0a;
+    --papier: #111111;
+    --ink: #f2f0ec;
+    --text: #f2f0ec;
+    --muted: #8b8985;
+    --border: #f2f0ec;
+    --accent-red: #1a1a1a;
+    --accent-blue: #4f4f4f;
+    --accent-green: #828282;
+    --accent-yellow: #b3b3b3;
+}
+
+  html, body, [class*="css"] { font-family: 'Inter', Helvetica, sans-serif; }
+  header[data-testid="stHeader"] { display: none; }
+
+  /* Papierkorn: feines Rauschen, damit das Weiss nicht steril wirkt */
+  .stApp {
+    background-color: var(--bg);
+    color: var(--text);
+    background-image:
+      radial-gradient(#ffffff 0.5px, transparent 0.6px),
+      radial-gradient(#ffffff 0.5px, transparent 0.6px);
+    background-size: 6px 6px, 6px 6px;
+    background-position: 0 0, 3px 3px;
+  }
+  .stApp::before {
+    content: "";
+    position: fixed; inset: 0;
+    background: var(--bg);
+    opacity: 0.92;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .block-container { position: relative; z-index: 1; padding-top: 1.5rem; padding-bottom: 2rem; }
+  .stApp, .stApp p, .stApp li, .stApp label,
+  [data-testid="stMarkdownContainer"] { color: var(--text); }
+  ::selection { background: var(--ink); color: #0a0a0a; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Archivo Black', Helvetica, sans-serif !important;
+    font-weight: 400 !important;
+    color: var(--text) !important;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+  h3 { font-size: 1.7rem !important; line-height: 0.95; }
+
+  /* KPI: die Zahl sprengt den Kasten, das Label ist winzig und klebt an der Kante.
+     Die farbige Oberkante kommt inline vom KpiRenderer und wird hier zum Balken. */
+  .kpi-box {
+    background: var(--papier);
+    border: none;
+    box-shadow: none;
+    padding: 0 0 14px 0;
+    border-radius: 0;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .kpi-box[style*="border-top"] {
+    border-top-width: 16px !important;
+  }
+  .kpi-label {
+    font-family: 'Inter', Helvetica, sans-serif;
+    font-size: 0.56rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--ink); background: none; font-weight: 500;   /* vorher: color: #0a0a0a; background: var(--ink); */
+    padding: 16px 12px 0 12px; margin: 0 0 10px 0;           /* vorher: padding: 6px 12px */
+    display: block;                                          /* vorher: inline-block */
+  }
+  /* Gross und gestreckt, aber der Wert bricht um statt abgeschnitten zu werden */
+  .kpi-value {
+    font-family: 'Archivo Black', Helvetica, sans-serif;
+    font-size: 2.6rem; font-weight: 400; color: var(--ink);
+    line-height: 0.92; margin: 0 12px 10px -0.04em; padding-left: 12px;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    transform: scaleY(1.1);
+    transform-origin: left top;
+    overflow-wrap: break-word;
+  }
+  .kpi-up, .kpi-neutral, .kpi-down {
+    font-family: 'Inter', Helvetica, sans-serif;
+    font-size: 0.64rem; font-weight: 400; margin: 14px 12px 0 12px; display: block;
+  }
+  .kpi-up      { color: var(--ink); }
+  .kpi-neutral { color: var(--muted); }
+  .kpi-down    { color: var(--ink); opacity: 0.6; }
+
+  /* Abschnittstitel als schwarzer Balken, links angeschnitten */
+  .section-title {
+    display: inline-block;
+    font-family: 'Inter', Helvetica, sans-serif;
+    font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em;
+    text-transform: uppercase; color: #0a0a0a;
+    background: var(--ink);
+    border-bottom: none;
+    padding: 7px 18px 7px 22px;
+    margin: 18px 0 10px -22px;
+  }
+  .sample-size {
+      font-family: 'Inter', Helvetica, sans-serif;
+      font-size: 0.56rem;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+  }
+
+[class*="st-key-karte"] {
+    background: var(--papier);
+    border: none;
+    border-radius: 0;
+    padding: 1.4rem;
+    box-shadow: none;
+}
+[class*="st-key-karte"]:hover { background: #1a1a1a; }
+
+[data-baseweb="select"] > div, .stTextInput input, .stNumberInput input {
+    background: var(--papier) !important;
+    border: 1px solid rgba(242, 240, 236, 0.20) !important;
+    border-radius: 0 !important;
+    color: var(--text) !important;
+    font-family: 'Inter', Helvetica, sans-serif !important;
+}
+[data-testid="stMetricValue"] { color: var(--text); }
+hr, [data-testid="stDivider"] { border-color: rgba(242, 240, 236, 0.18); border-width: 1px; }
+
+/* Footer */
+footer{padding:34px 0;border-top:1px solid rgba(242, 240, 236, 0.18);color:var(--muted);font-size:0.56rem;letter-spacing:0.3em;text-transform:uppercase}
+
+.footer-logos {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 2.5rem;
+flex-wrap: wrap;
+margin-bottom: 0.5rem;
+}
+
+.footer-logos img {
+height: 70px;
+max-width: 140px;
+object-fit: contain;
+opacity: 0.8;
+filter: brightness(0) invert(1);
+transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-logos img:hover { opacity: 1; transform: scale(1.04); }
+
+.footer-bottom {
+display: flex;
+justify-content: space-between;
+gap: 1rem;
+flex-wrap: wrap;
+width: 100%;
+}
+
+.stat-label {
+    font-family: 'Inter', Helvetica, sans-serif;
+    font-size: 0.56rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--ink);
+    margin: 0 0 0.9rem 0;
+}
+
+.stat-number {
+    font-family: 'Archivo Black', Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 6.2rem;
+    line-height: 0.86;
+    letter-spacing: -0.055em;
+    margin: 0;
+    color: var(--ink);
+    text-transform: uppercase;
+}
+
+.stat-number .percent {
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--bg);
+    -webkit-text-stroke: 2px var(--ink);
+    vertical-align: top;
+    margin-left: 0.04em;
+}
+
+.stat-description {
+    font-family: 'Inter', Helvetica, sans-serif;
+    margin: 0.9rem 0 0 0;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    opacity: 1;
 }
 </style>
 """

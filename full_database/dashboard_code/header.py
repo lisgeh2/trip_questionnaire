@@ -66,6 +66,22 @@ def give_subtitle_block(subtitle):
       {subtitle}
     </div>
     """
+  if STYLE == "black_white":
+    return f"""
+    <div style="
+      font-family: 'Inter', Helvetica, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.5;
+      color: #f2f0ec;
+      margin-top: 0;
+      margin-bottom: 0;
+      max-width: 30ch;
+    ">
+      {subtitle}
+    </div>
+    """
 
 def give_header_css(window, year, title, subtitle_block, image_b64):
   if STYLE == "gfs":
@@ -485,6 +501,104 @@ def give_header_css(window, year, title, subtitle_block, image_b64):
       width: auto;
       display: block;
       object-fit: contain;
+      ">
+      </div>
+      </div>
+      </div>
+      """
+
+  if STYLE == "black_white":
+    return f"""
+      <div style="
+      background: #111111;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      margin-bottom: 26px;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Archivo Black', 'Archivo', Helvetica, sans-serif;
+      ">
+
+      <!-- Schwarze Flaeche als Form. Sie wird angeschnitten, der Text nie. -->
+      <div style="
+      position: absolute;
+      right: -6%; top: -40%;
+      width: 30%; height: 190%;
+      background: #f2f0ec;
+      transform: rotate(14deg);
+      pointer-events: none;
+      "></div>
+
+      <!-- Titel: gross und gestreckt, aber vollstaendig. Umbruch statt Schnitt. -->
+      <div style="
+      position: relative;
+      padding: 30px 0 0 24px;
+      ">
+      <div style="
+      font-family: 'Archivo Black', Helvetica, sans-serif;
+      font-size: 4.3rem;
+      font-weight: 400;
+      color: {MULTIPLE_COLORS[5]};
+      line-height: 0.88;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      margin: 0 0 0 -0.04em;
+      transform: scaleY(1.12);
+      transform-origin: left top;
+      max-width: 62%;
+      overflow-wrap: break-word;
+      ">
+      {title}
+      </div>
+      </div>
+
+      <!-- Fusszeile: winzige Captions gegen die Riesentype -->
+      <div style="
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      gap: 28px;
+      padding: 40px 24px 20px 24px;
+      ">
+
+      <div style="
+      font-family: 'Inter', Helvetica, sans-serif;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      line-height: 1.7;
+      text-transform: uppercase;
+      color: #f2f0ec;
+      border-top: 1px solid rgba(242, 240, 236, 0.28);
+      padding-top: 9px;
+      white-space: nowrap;
+      ">{window}<br>Schweiz {year}</div>
+
+      {subtitle_block}
+
+      <div style="
+      margin-left: auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 18px;
+      flex: 0 0 auto;
+      ">
+      <div style="
+      font-family: 'Archivo Black', Helvetica, sans-serif;
+      font-size: 3rem;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: #111111;
+      transform: scaleY(1.14);
+      transform-origin: right bottom;
+      ">{year}</div>
+      <img src="data:image/png;base64,{image_b64}" alt="GFS" style="
+      max-height: 62px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
       ">
       </div>
       </div>

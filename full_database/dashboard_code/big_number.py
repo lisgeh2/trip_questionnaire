@@ -111,8 +111,7 @@ def give_html(color, farben, height_css, flex_css):
         gap: 0.2rem;
         box-shadow: inset 0 0 0 1px var(--card),
                     inset 0 0 0 4px var(--rule),
-                    0 18px 34px -12px rgba(34, 32, 27, 0.42),
-                    0 4px 10px rgba(34, 32, 27, 0.18);
+                    0 1px 2px rgba(34, 32, 27, 0.10);
     }}
     .stat-card.accent-{color}::before {{
         content: "";
@@ -242,6 +241,85 @@ def give_html(color, farben, height_css, flex_css):
     }}
     </style>"""
 
+    if STYLE == "black_white":
+        return f"""<style>
+    .stat-card.accent-{color} {{
+        --papier: #111111;
+        --ink:    #f2f0ec;
+        --ton:    {farben['basis']};
+
+        background: var(--papier);
+        border: none;
+        border-radius: 0;
+        padding: 1.1rem 1.2rem 2.6rem 1.2rem;
+        position: relative;
+        overflow: hidden;
+        font-family: "Archivo Black", "Archivo", Helvetica, sans-serif;
+        color: var(--ink);
+        {height_css};
+        {flex_css};
+        box-shadow: none;
+    }}
+    /* Tonflaeche als Form. Sie wird angeschnitten, die Zahl nicht. */
+    .stat-card.accent-{color}::before {{
+        content: "";
+        position: absolute;
+        right: -14%; top: -30%;
+        width: 52%; height: 90%;
+        background: var(--ton);
+        opacity: 0.26;
+        transform: rotate(18deg);
+        pointer-events: none;
+    }}
+    /* Winziges Caption-Label, an der Unterkante */
+    .stat-card.accent-{color} .section-title {{
+        position: absolute;
+        left: 0; bottom: 0;
+        background: var(--ink);
+        color: #0a0a0a;
+        border-bottom: none;
+        font-family: "Inter", Helvetica, sans-serif;
+        font-size: 0.54rem;
+        font-weight: 500;
+        letter-spacing: 0.26em;
+        padding: 6px 14px;
+        margin: 0;
+        z-index: 2;
+    }}
+    .stat-card.accent-{color} .stat-label {{ color: var(--ink); }}
+    .stat-card.accent-{color} .stat-number {{
+        text-align: left;
+        color: var(--ink);
+        font-family: "Archivo Black", Helvetica, sans-serif;
+        font-size: 6.2rem;
+        line-height: 0.86;
+        letter-spacing: -0.055em;
+        margin: 0 0 0 -0.045em;
+        transform: scaleY(1.12);
+        transform-origin: left top;
+        position: relative;
+        z-index: 1;
+    }}
+    .stat-card.accent-{color} .percent {{
+        font-size: 2.4rem;
+        color: #111111;
+        -webkit-text-stroke: 2px var(--ink);
+        margin-left: 0.05em;
+    }}
+    .stat-card.accent-{color} .stat-description {{
+        font-family: "Inter", Helvetica, sans-serif;
+        font-size: 0.72rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: var(--ink);
+        text-align: left;
+        max-width: 30ch;
+        margin: 0.9rem 0 0 0;
+        padding: 0;
+        position: relative;
+        z-index: 2;
+    }}
+    </style>"""
 
 def big_number(area, column, column_text, number, text, color="rot", add_percent=True, height = None):
     farben = FARBEN_4_ABSTUFUNGEN[color]
