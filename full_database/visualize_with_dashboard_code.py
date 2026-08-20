@@ -81,7 +81,7 @@ st.set_page_config(
 # ── GLOBALES CSS ─────────────────────────────────────────────
 st.markdown(GLOBAL, unsafe_allow_html=True)
 
-st.markdown(h.set_background(hex_color=BACKGROUND[1]), unsafe_allow_html=True)
+st.markdown(h.set_background(hex_color=BACKGROUND[2]), unsafe_allow_html=True)
 
 # ── HEADER ──────────────────────────────────────────────────
 st.markdown(

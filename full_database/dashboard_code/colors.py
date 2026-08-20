@@ -61,7 +61,7 @@ def give_background():
         return ["#f4f0e4", "#ece5d2", "#6e685b", "#14130f"]
     if STYLE == "cool_black":
         # [0] Karten-Fläche, [1] Seiten-Hintergrund, [2] Linien/Trenner, [3] Text hell
-        return ["#0b0d14", "#05060a", "#171b2b", "#eaf0ff"]
+        return ["#0b0d14", "#141725", "#171b2b", "#eaf0ff"]
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 
