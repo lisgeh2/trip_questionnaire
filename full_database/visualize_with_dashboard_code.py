@@ -27,7 +27,7 @@ from dashboard_code.density_chart import create_density_plot
 from dashboard_code.multi_stacked_barchart import create_multi_stacked_barchart
 import dashboard_code.HandleMeta
 from dashboard_code.HandleMeta import load_local_thing
-from dashboard_code.config import WEIGHTING
+from dashboard_code.config import WEIGHTING, DATA_TYPE
 import altair as alt
 from dashboard_code.pie_chart import create_piechart
 from dashboard_code.big_number import big_number
@@ -39,14 +39,31 @@ from process_df import build_df
 from process_meta import transform_to_meta, DONT_KNOW
 cards = CardHandler()
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent / "dashboard_code"))
+
+HERE = Path(__file__).resolve().parent
+IMAGES = HERE / "images"
+
+# Path
+
+here = Path(__file__).parent
+sav_path = here / "dashboard_code" / "fertig_all_waves_UV_RANDOM.sav"
+
+
 @st.cache_data
 def load_data():
-    HERE = Path(__file__).parent
-    sav_path = HERE / "dashboard_code" / "fertig_all_waves_UV_RANDOM.sav"
-    print("Looking for:", sav_path)
-    print("Exists?", sav_path.exists())
-    df, meta = pyreadstat.read_sav(str(HERE / "fertig_all_waves_UV_RANDOM.sav"))
+    if DATA_TYPE == "sav":
+        df, meta = pyreadstat.read_sav(str(sav_path))
+    elif DATA_TYPE == "jsonl":
+        df = build_df()
+        meta = transform_to_meta()
+    else:
+        raise ValueError(f"Unknown DATA_TYPE: {DATA_TYPE}")
+
     return df, meta
+
 
 df, meta = load_data()
 
@@ -54,23 +71,10 @@ df, meta = load_data()
 
 
 
-# Nur wenn man im gfs environment ist, und zugang auf den Hintergrund-Code hat, kann man den metatable laden.
-# Wenn man das nicht hat, muss man eine (broken) eigenfunktion verwenden, welche die Labels über meta holt. (siehe HandleMeta)
-# Dort kann man auch IN_GFS auf True oder False setzen
-
-
-df, meta = pyreadstat.read_sav("fertig_all_waves_UV_RANDOM.sav")
-#####################################
-
-# @st.cache_data
-# df = build_df()
-# meta = transform_to_meta()
-
-
 # ── SEITEN-KONFIGURATION ────────────────────────────────────
 st.set_page_config(
     page_title="gfs-Dashboard",
-    page_icon="gfs.png",
+    page_icon="images/gfs.png",
     layout="wide",
 )
 
@@ -82,6 +86,7 @@ st.markdown(h.set_background(hex_color=BACKGROUND[1]), unsafe_allow_html=True)
 # ── HEADER ──────────────────────────────────────────────────
 st.markdown(
     header(
+        image=str(IMAGES / "gfs.png"),
         title="OMNIBUS NOVEMBER 2025",
         subtitle="Zentrale Kennzahlen, Verhaltensmuster und Trends auf einen Blick. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
         year=2026,
@@ -270,6 +275,6 @@ with x1:
 st.divider()
 
 st.html(footer(
-    logos=["gfs.png", "uni.png", "kmu.png"]
+    logos=[str(IMAGES / n) for n in ("gfs.png", "uni.png", "kmu.png")]
 ))
 st.caption("gfs-Demo-Dashboard · Daten nicht akkurat · Erstellt von Lisa Gehrig · 22.04.2026")
