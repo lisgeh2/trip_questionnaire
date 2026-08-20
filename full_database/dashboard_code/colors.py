@@ -34,6 +34,17 @@ def give_multiple_colors():
                 "#8ea182",  # gruen-grau – Flechte (grau)
                 "#ddd0b4",  # pergament (paper)
                 ]
+    if STYLE == "comic_brutalist":
+        return [
+                "#d8382c",  # rot – Druckfarbe Rot
+                "#2b7ad4",  # blau – Druckfarbe Blau (Core)
+                "#f2c400",  # gelb – Druckfarbe Gelb
+                "#1f8a4d",  # gruen – Druckfarbe Gruen
+                "#6b3fa0",  # violett – fuenfte Farbe fuer Kategorien
+                "#14161a",  # tinte (dunkel)
+                "#8b8578",  # presse-grau (grau)
+                "#ded8c8",  # papier
+                ]
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_core_color():
@@ -79,6 +90,20 @@ def give_core_color():
     "#38623f1A",  # 90% transparenz / 10% sichtbar
     "#38623f00",  # 100% transparenz / 0% sichtbar
     ]
+    if STYLE == "comic_brutalist":
+        return [
+    "#2b7ad4",    # 0% transparenz / 100% sichtbar
+    "#2b7ad4E6",  # 10% transparenz / 90% sichtbar
+    "#2b7ad4CC",  # 20% transparenz / 80% sichtbar
+    "#2b7ad4B3",  # 30% transparenz / 70% sichtbar
+    "#2b7ad499",  # 40% transparenz / 60% sichtbar
+    "#2b7ad480",  # 50% transparenz / 50% sichtbar
+    "#2b7ad466",  # 60% transparenz / 40% sichtbar
+    "#2b7ad44D",  # 70% transparenz / 30% sichtbar
+    "#2b7ad433",  # 80% transparenz / 20% sichtbar
+    "#2b7ad41A",  # 90% transparenz / 10% sichtbar
+    "#2b7ad400",  # 100% transparenz / 0% sichtbar
+    ]
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_background():
@@ -89,7 +114,10 @@ def give_background():
         return ["#0b0d14", "#05060a", "#171b2b", "#eaf0ff"]
     if STYLE == "leavy":
         # [0] Karte, [1] Seiten-Hintergrund, [2] Linien, [3] Tinte
-        return ["#fdfaf3", "#f2ebda", "#d8cdb4", "#22201b"]
+        return ["#fdfaf3", "#d8cdb4", "#c3cab0", "#22201b"]
+    if STYLE == "comic_brutalist":
+        # [0] Karte, [1] Seiten-Hintergrund, [2] Rahmen/Tinte, [3] Tinte
+        return ["#f4f1e8", "#ece8dc", "#14161a", "#14161a"]
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 
@@ -129,6 +157,17 @@ def give_binaer_verlauf_opposite():
     8: ['#3f5e78', '#6f838f', '#a0a8a6', '#d0cdbd', '#dbc8b2', '#c19986', '#a66a5a', '#8c3b2e'],
     9: ['#3f5e78', '#697e8c', '#949ea0', '#bebfb4', '#e8dfc8', '#d1b6a2', '#ba8d7b', '#a36454', '#8c3b2e'],
     }
+    if STYLE == "comic_brutalist":
+        return {
+    2: ['#2b7ad4', '#d8382c'],
+    3: ['#2b7ad4', '#ded8c8', '#d8382c'],
+    4: ['#2b7ad4', '#a2b9cc', '#dca394', '#d8382c'],
+    5: ['#2b7ad4', '#84a9ce', '#ded8c8', '#db887a', '#d8382c'],
+    6: ['#2b7ad4', '#73a0cf', '#bac5ca', '#ddb8a9', '#da786a', '#d8382c'],
+    7: ['#2b7ad4', '#6799d0', '#a2b9cc', '#ded8c8', '#dca394', '#da6d60', '#d8382c'],
+    8: ['#2b7ad4', '#5e95d1', '#91b0cd', '#c4cbca', '#ddc1b2', '#db9385', '#da6659', '#d8382c'],
+    9: ['#2b7ad4', '#5892d1', '#84a9ce', '#b1c0cb', '#ded8c8', '#dcb0a1', '#db887a', '#da6053', '#d8382c'],
+    }
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_binaer_verlauf():
@@ -166,6 +205,17 @@ def give_binaer_verlauf():
     8: ['#8c3b2e', '#a66a5a', '#c19986', '#dbc8b2', '#d0cdbd', '#a0a8a6', '#6f838f', '#3f5e78'],
     9: ['#8c3b2e', '#a36454', '#ba8d7b', '#d1b6a2', '#e8dfc8', '#bebfb4', '#949ea0', '#697e8c', '#3f5e78'],
     }
+    if STYLE == "comic_brutalist":
+        return {
+    2: ['#d8382c', '#2b7ad4'],
+    3: ['#d8382c', '#ded8c8', '#2b7ad4'],
+    4: ['#d8382c', '#dca394', '#a2b9cc', '#2b7ad4'],
+    5: ['#d8382c', '#db887a', '#ded8c8', '#84a9ce', '#2b7ad4'],
+    6: ['#d8382c', '#da786a', '#ddb8a9', '#bac5ca', '#73a0cf', '#2b7ad4'],
+    7: ['#d8382c', '#da6d60', '#dca394', '#ded8c8', '#a2b9cc', '#6799d0', '#2b7ad4'],
+    8: ['#d8382c', '#da6659', '#db9385', '#ddc1b2', '#c4cbca', '#91b0cd', '#5e95d1', '#2b7ad4'],
+    9: ['#d8382c', '#da6053', '#db887a', '#dcb0a1', '#ded8c8', '#b1c0cb', '#84a9ce', '#5892d1', '#2b7ad4'],
+    }
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_farben_4():
@@ -175,6 +225,8 @@ def give_farben_4():
         return {"grün": "#3dff8b", "rot": "#ff2d95", "blau": "#00d9ff", "gelb": "#ffd60a"}
     if STYLE == "leavy":
         return {"grün": "#38623f", "rot": "#8c3b2e", "blau": "#3f5e78", "gelb": "#b0862e"}
+    if STYLE == "comic_brutalist":
+        return {"grün": "#1f8a4d", "rot": "#d8382c", "blau": "#2b7ad4", "gelb": "#f2c400"}
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")
 
 def give_farben_4_abstufungen():
@@ -273,6 +325,37 @@ def give_farben_4_abstufungen():
         "basis":      "#b0862e",
         "dunkel":     "#7e6227",
         "sehr_dunkel":"#4f4121",
+    },
+    }
+    if STYLE == "comic_brutalist":
+        return {
+    "grün": {
+        "sehr_hell":  "#c5dac6",
+        "hell":       "#81b994",
+        "basis":      "#1f8a4d",
+        "dunkel":     "#1b653d",
+        "sehr_dunkel":"#18402c",
+    },
+    "rot": {
+        "sehr_hell":  "#eec8bf",
+        "hell":       "#e58d82",
+        "basis":      "#d8382c",
+        "dunkel":     "#992d26",
+        "sehr_dunkel":"#5b2220",
+    },
+    "blau": {
+        "sehr_hell":  "#c8d7e4",
+        "hell":       "#87b1dd",
+        "basis":      "#2b7ad4",
+        "dunkel":     "#245a98",
+        "sehr_dunkel":"#1c3a5d",
+    },
+    "gelb": {
+        "sehr_hell":  "#f4e7b5",
+        "hell":       "#f3d96b",
+        "basis":      "#f2c400",
+        "dunkel":     "#ab8c08",
+        "sehr_dunkel":"#645511",
     },
     }
     raise ValueError(f"Unbekannter STYLE: {STYLE!r}")

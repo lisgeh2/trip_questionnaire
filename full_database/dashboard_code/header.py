@@ -48,6 +48,24 @@ def give_subtitle_block(subtitle):
       {subtitle}
     </div>
     """
+  if STYLE == "comic_brutalist":
+    return f"""
+    <div style="
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+      color: #14161a;
+      opacity: 0.78;
+      margin-top: 16px;
+      margin-bottom: 0;
+      max-width: 46ch;
+      border-left: 4px solid {MULTIPLE_COLORS[0]};
+      padding-left: 12px;
+    ">
+      {subtitle}
+    </div>
+    """
 
 def give_header_css(window, year, title, subtitle_block, image_b64):
   if STYLE == "gfs":
@@ -204,8 +222,8 @@ def give_header_css(window, year, title, subtitle_block, image_b64):
       background: linear-gradient(100deg,
                   {MULTIPLE_COLORS[5]} 0%,
                   {MULTIPLE_COLORS[5]} 38%,
-                  {MULTIPLE_COLORS[5]} 78%,
-                  {MULTIPLE_COLORS[5]} 100%);
+                  {MULTIPLE_COLORS[0]} 78%,
+                  {MULTIPLE_COLORS[4]} 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -340,6 +358,133 @@ def give_header_css(window, year, title, subtitle_block, image_b64):
       display: block;
       object-fit: contain;
       opacity: 0.9;
+      ">
+      </div>
+      </div>
+      </div>
+      """
+
+  if STYLE == "comic_brutalist":
+    return f"""
+      <div style="
+      background: #f4f1e8;
+      border: 5px solid #14161a;
+      border-radius: 0;
+      padding: 0;
+      margin-bottom: 26px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 12px 12px 0 0 {MULTIPLE_COLORS[1]},
+                  12px 12px 0 5px #14161a;
+      ">
+
+      <!-- Halbtonfeld hinter dem Titel -->
+      <div style="
+      position: absolute;
+      left: 0; top: 0;
+      width: 38%; height: 100%;
+      background-image: radial-gradient(#14161a 1.6px, transparent 1.7px);
+      background-size: 10px 10px;
+      opacity: 0.13;
+      pointer-events: none;
+      "></div>
+
+      <!-- Technischer Streifen an der Oberkante -->
+      <div style="
+      display: flex;
+      align-items: stretch;
+      border-bottom: 5px solid #14161a;
+      position: relative;
+      ">
+      <div style="
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f4f1e8;
+      background: {MULTIPLE_COLORS[1]};
+      padding: 9px 16px;
+      border-right: 5px solid #14161a;
+      white-space: nowrap;
+      ">{window}</div>
+      <div style="
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #14161a;
+      padding: 9px 16px;
+      opacity: 0.65;
+      ">/// Schweiz {year} ///</div>
+      <div style="
+      margin-left: auto;
+      background: {MULTIPLE_COLORS[2]};
+      border-left: 5px solid #14161a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #14161a;
+      padding: 9px 16px;
+      white-space: nowrap;
+      ">System Status &#9632; Live</div>
+      </div>
+
+      <!-- Hauptzeile: Titel links, Logo rechts -->
+      <div style="
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0;
+      position: relative;
+      ">
+
+      <div style="
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 26px 28px 30px 28px;
+      ">
+
+      <div style="
+      font-family: 'Anton', 'Archivo', Impact, sans-serif;
+      font-size: 5.2rem;
+      font-weight: 400;
+      color: {MULTIPLE_COLORS[5]};
+      line-height: 0.84;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      margin: 0;
+      text-shadow: 5px 5px 0 {MULTIPLE_COLORS[0]}33;
+      ">
+      {title}
+      </div>
+
+      {subtitle_block}
+
+      </div>
+
+      <!-- Logo in einem eigenen Kasten -->
+      <div style="
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 26px;
+      border-left: 5px solid #14161a;
+      background: #ece8dc;
+      ">
+      <img src="data:image/png;base64,{image_b64}" alt="GFS" style="
+      max-height: 96px;
+      width: auto;
+      display: block;
+      object-fit: contain;
       ">
       </div>
       </div>

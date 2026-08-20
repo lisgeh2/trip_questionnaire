@@ -111,7 +111,8 @@ def give_html(color, farben, height_css, flex_css):
         gap: 0.2rem;
         box-shadow: inset 0 0 0 1px var(--card),
                     inset 0 0 0 4px var(--rule),
-                    0 1px 2px rgba(34, 32, 27, 0.10);
+                    0 18px 34px -12px rgba(34, 32, 27, 0.42),
+                    0 4px 10px rgba(34, 32, 27, 0.18);
     }}
     .stat-card.accent-{color}::before {{
         content: "";
@@ -155,6 +156,89 @@ def give_html(color, farben, height_css, flex_css):
     .stat-card.accent-{color} .stat-number {{
         text-align: center;
         color: var(--accent);
+    }}
+    </style>"""
+
+    if STYLE == "comic_brutalist":
+        return f"""<style>
+    .stat-card.accent-{color} {{
+        --paper:  #f4f1e8;
+        --ink:    #14161a;
+        --accent: {farben['basis']};
+
+        background: var(--paper);
+        border: 4px solid var(--ink);
+        border-radius: 0;
+        padding: 0 1.6rem 1.4rem 1.6rem;
+        position: relative;
+        overflow: hidden;
+        font-family: "Archivo", Helvetica, sans-serif;
+        color: var(--ink);
+        {height_css};
+        {flex_css};
+        box-shadow: 9px 9px 0 0 var(--accent),
+                    9px 9px 0 4px var(--ink);
+    }}
+    /* Halbtonfeld, unten links, wie ein Rasterdruck */
+    .stat-card.accent-{color}::before {{
+        content: "";
+        position: absolute;
+        left: 0; bottom: 0;
+        width: 46%; height: 42%;
+        background-image: radial-gradient(var(--ink) 1.4px, transparent 1.5px);
+        background-size: 9px 9px;
+        opacity: 0.16;
+        pointer-events: none;
+    }}
+    /* Farbblock, der die rechte Kante sprengt */
+    .stat-card.accent-{color}::after {{
+        content: "";
+        position: absolute;
+        top: 0; right: 0;
+        width: 26px; height: 54%;
+        background: var(--accent);
+        border-left: 4px solid var(--ink);
+        pointer-events: none;
+    }}
+    /* Label als schwarzer Streifen, der an der Oberkante klebt */
+    .stat-card.accent-{color} .section-title {{
+        display: block;
+        background: var(--ink);
+        color: var(--paper);
+        border-bottom: none;
+        margin: 0 -1.6rem 1.1rem -1.6rem;
+        padding: 9px 1.6rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        position: relative;
+        z-index: 1;
+    }}
+    .stat-card.accent-{color} .stat-label {{ color: var(--ink); }}
+    .stat-card.accent-{color} .stat-description {{
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.72rem;
+        line-height: 1.5;
+        color: var(--ink);
+        opacity: 0.75;
+        text-align: left;
+        max-width: 34ch;
+        position: relative;
+        z-index: 1;
+    }}
+    .stat-card.accent-{color} .percent {{
+        color: var(--accent);
+        -webkit-text-stroke: 2px var(--ink);
+        margin-left: 0.02em;
+    }}
+    .stat-card.accent-{color} .stat-number {{
+        text-align: left;
+        color: var(--accent);
+        -webkit-text-stroke: 3px var(--ink);
+        paint-order: stroke fill;
+        position: relative;
+        z-index: 1;
     }}
     </style>"""
 
