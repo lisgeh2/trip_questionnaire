@@ -37,6 +37,57 @@ def give_html(color, farben, height_css, flex_css):
     .stat-card.accent-{color} .stat-number {{ text-align: center; }}
     </style>"""
 
+    if STYLE == "cool_black":
+        return f"""<style>
+    .stat-card.accent-{color} {{
+        --accent: {farben['basis']};
+        --glow:   {farben['dunkel']};
+        --text:   {farben['sehr_dunkel']};
+        --muted:  rgba(234, 240, 255, 0.45);
+
+        background: linear-gradient(150deg,
+                    {farben['sehr_hell']} 0%,
+                    rgba(5, 6, 10, 0) 55%);
+        border: 1px solid rgba(234, 240, 255, 0.10);
+        border-left: 3px solid var(--accent);
+        border-radius: 2px;
+        padding: 1.75rem 2rem;
+        position: relative;
+        overflow: hidden;
+        font-family: "Archivo", "Inter", -apple-system, sans-serif;
+        color: var(--text);
+        {height_css};
+        {flex_css};
+        box-shadow: none;
+    }}
+    .stat-card.accent-{color}::before {{
+        content: "";
+        position: absolute;
+        top: -60%; right: -30%;
+        width: 70%; height: 200%;
+        background: radial-gradient(closest-side, var(--accent), transparent);
+        opacity: 0.16;
+        filter: blur(28px);
+        pointer-events: none;
+    }}
+    .stat-card.accent-{color} .section-title {{
+        color: var(--accent);
+        border-bottom: 1px solid rgba(234, 240, 255, 0.10);
+        opacity: 0.9;
+    }}
+    .stat-card.accent-{color} .stat-label       {{ color: var(--muted); }}
+    .stat-card.accent-{color} .stat-description {{ color: var(--muted); }}
+    .stat-card.accent-{color} .percent {{
+        color: var(--accent);
+        text-shadow: 0 0 18px var(--accent);
+    }}
+    .stat-card.accent-{color} .stat-number {{
+        text-align: left;
+        color: var(--text);
+        text-shadow: 0 0 34px {farben['hell']};
+    }}
+    </style>"""
+
 
 def big_number(area, column, column_text, number, text, color="rot", add_percent=True, height = None):
     farben = FARBEN_4_ABSTUFUNGEN[color]

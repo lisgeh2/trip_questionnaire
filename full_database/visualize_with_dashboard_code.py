@@ -88,7 +88,7 @@ st.markdown(
     header(
         image=str(IMAGES / "gfs.png"),
         title="OMNIBUS NOVEMBER 2025",
-        subtitle="Zentrale Kennzahlen, Verhaltensmuster und Trends auf einen Blick. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        subtitle="",
         year=2026,
         window="Marktforschungs-Dashboard",
     ),
