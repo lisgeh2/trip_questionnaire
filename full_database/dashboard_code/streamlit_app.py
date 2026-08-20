@@ -37,25 +37,20 @@ from crunch_label import give_crunch_label
 cards = CardHandler()
 
 
-@st.cache_data
-def load_data():
-    HERE = Path(__file__).parent
-    sav_path = HERE / "fertig_all_waves_UV_RANDOM.sav"
-    print("Looking for:", sav_path)
-    print("Exists?", sav_path.exists())
-    df, meta = pyreadstat.read_sav(str(HERE / "fertig_all_waves_UV_RANDOM.sav"))
-    return df, meta
-
-df, meta = load_data()
-
 # define weighting and your environment in the config.py file
-
-
 # Nur wenn man im gfs environment ist, und zugang auf den Hintergrund-Code hat, kann man den metatable laden.
 # Wenn man das nicht hat, muss man eine (broken) eigenfunktion verwenden, welche die Labels über meta holt. (siehe HandleMeta)
 # Dort kann man auch IN_GFS auf True oder False setzen
 
-df, meta = pyreadstat.read_sav("fertig_all_waves_UV_RANDOM.sav")
+# @st.cache_data
+
+if config.DATA_TYPE == "sav":
+    df, meta = pyreadstat.read_sav("fertig_all_waves_UV_RANDOM.sav")
+#####################################
+
+elif config.DATA_TYPE == "jsonl":
+    df = build_df()
+    meta = transform_to_meta()
 
 
 # ── SEITEN-KONFIGURATION ────────────────────────────────────
