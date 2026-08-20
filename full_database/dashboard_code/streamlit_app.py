@@ -28,7 +28,6 @@ from multi_stacked_barchart import create_multi_stacked_barchart
 import HandleMeta
 from HandleMeta import load_local_thing
 from config import WEIGHTING
-import altair as alt
 from pie_chart import create_piechart
 from big_number import big_number
 from footer import footer
@@ -51,20 +50,12 @@ df, meta = load_data()
 
 # define weighting and your environment in the config.py file
 
-if IN_GFS:
-    os.chdir(Path(__file__).parent)
-
 
 # Nur wenn man im gfs environment ist, und zugang auf den Hintergrund-Code hat, kann man den metatable laden.
 # Wenn man das nicht hat, muss man eine (broken) eigenfunktion verwenden, welche die Labels über meta holt. (siehe HandleMeta)
 # Dort kann man auch IN_GFS auf True oder False setzen
 
-if IN_GFS:
-    metatable = load_local_thing(path="MetaTable.pkl")
-    HERE = Path(__file__).parent
-    df, meta = pyreadstat.read_sav(str(HERE / "fertig_all_waves_UV_RANDOM.sav"))
-else:
-    df, meta = pyreadstat.read_sav("fertig_all_waves_UV_RANDOM.sav")
+df, meta = pyreadstat.read_sav("fertig_all_waves_UV_RANDOM.sav")
 
 
 # ── SEITEN-KONFIGURATION ────────────────────────────────────

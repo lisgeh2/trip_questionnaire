@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.express as px
 import HandleMeta
-from colors import MULTIPLE_COLORS, C, BINAER_VERLAUF, BINAER_VERLAUF_OPPOSITE
+from colors import MULTIPLE_COLORS, MULTIPLE_COLORS, BINAER_VERLAUF, BINAER_VERLAUF_OPPOSITE, FARBEN_4
 from crunch_label import give_crunch_label
 from typing import Literal, Optional, Union
 from helpers import clean_plot_array, clean_value_labels
@@ -138,7 +138,7 @@ def handle_horizontal(x, y, horizontal):
 def handle_color(color, color_gradient, values, num_categories):
     # Default Fallback
     color_continuous_scale = None
-    color_discrete_sequence = [MULTIPLE_COLORS[color]]
+    color_discrete_sequence = [FARBEN_4[color]]
     color_arg = None
     marker = None
     showlegend = False
@@ -208,4 +208,4 @@ def _validate_inputs(df, col, current_break, color):
     if current_break != "tz":
         assert current_break is None or current_break in df.columns, \
             f"current_break '{current_break}' is not a column in df"
-    assert color in C, f"color must be one of {C}"
+    assert color in FARBEN_4.keys(), f"color must be one of {MULTIPLE_COLORS}"
