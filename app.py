@@ -14,6 +14,7 @@ import streamlit as st
 import auth
 import storage
 from full_database.process_meta import PAGES, all_elements, element_keys, is_input
+from render_certificate import render
 # Every answer is stored in st.session_state under this prefix, e.g. "q_age".
 ANSWER_PREFIX = "q_"
 
@@ -219,7 +220,9 @@ def submit() -> None:
         st.error("Please answer these first: " + ", ".join(unanswered))
         return
 
-    storage.save_response(st.session_state.username, collect_answers())
+    answers = collect_answers()
+    storage.save_response(st.session_state.username, answers)
+    st.session_state.certificate_html = render(answers["token"])
     st.session_state.submitted = True
     st.rerun()
 
@@ -229,8 +232,6 @@ def render_thank_you() -> None:
     st.success(f"Your answers were saved to `{storage.DATA_FILE}`.")
 
     answers = collect_answers()
-    with st.expander("Show what you submitted"):
-        st.json(answers)
 
     st.download_button(
         "Download my answers (JSON)",
@@ -238,8 +239,14 @@ def render_thank_you() -> None:
         file_name="my_answers.json",
         mime="application/json",
     )
-    
-    
+
+    st.download_button(
+        "Download my certificate (HTML)",
+        data=st.session_state.certificate_html,
+        file_name=f"certificate_{st.session_state.username}.html",
+        mime="text/html",
+    )
+
     st.button("Finish and logout", on_click=log_out)
 
 
