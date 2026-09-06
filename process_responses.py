@@ -11,8 +11,8 @@ from ai_usage import give_interaction_safety_rating, give_interaction_safety_tex
 
 # average and spread of the 3-item absorption score in the general population.
 # ABSORPTION_SD is a guess - replace it if you have the real number.
-ABSORPTION_MEAN = 2.389705
-ABSORPTION_SD = 0.9
+ABSORPTION_MEAN = 1.92
+ABSORPTION_SD = 0.8
 
 responses = []
 
