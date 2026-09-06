@@ -14,11 +14,15 @@ from ai_usage import give_interaction_safety_rating, give_interaction_safety_tex
 ABSORPTION_MEAN = 2.389705
 ABSORPTION_SD = 0.9
 
-responses = [
-    json.loads(line)
-    for line in DATA_FILE.read_text(encoding="utf-8").splitlines()
-    if line.strip()
-]
+responses = (
+    [
+        json.loads(line)
+        for line in DATA_FILE.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    if DATA_FILE.exists()
+    else []
+)
 # take token as an arugment everywhere
 
 def likert_to_number(likert_item):
