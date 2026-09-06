@@ -17,7 +17,7 @@ PAGES = [
                 "label": """ "de muet zum chaos" """,
                 "type": "image",
                 "src": "entropy.png",
-                "width": 350,
+                "width": 400,
             },
             {"type": "markdown", "label": """Even though research methods are debates in the field of psychedelics, strong effect sizes for all sorts of mental problems have been shown in meta-analyses. 
             For example here a study on depression that showed a Hedges g of g = 3.1 (!) after one week and still g = 2.0 after 3 months, after one single dose. (Hedges g is (made for small sample sizes) is about equivalent to Cohens d)"""},
@@ -25,7 +25,7 @@ PAGES = [
                 "label": """ QIDS measures self-rated depression """,
                 "type": "image",
                 "src": "big_effects.png",
-                "width": 350,
+                "width": 400,
             },
             {"type": "markdown", "label": """Whereas conventional antidepressants score (in similar study designs) at around g = ~1.5. 
              But its not only effective with (treatment resistant) Depression, but also with: Alcohol use disorder, Anxiety and depression associated with cancer, Obsessive-compulsive disorder, smoking addiction, Anorexia nervosa."""},
