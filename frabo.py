@@ -70,7 +70,7 @@ PAGES = [
                 "label": """ "de muet zum chaos" """,
                 "type": "image",
                 "src": "curve.png",
-                "width": 350,
+                "width": 410,
             },
             {"type": "markdown", "label": """**Your head:**
 
