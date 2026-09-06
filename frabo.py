@@ -17,15 +17,15 @@ PAGES = [
                 "label": """ "de muet zum chaos" """,
                 "type": "image",
                 "src": "entropy.png",
-                "width": 600,
+                "width": 350,
             },
-            {"type": "markdown", "label": """Even though research methods are debates in the field of psychedelics, strong effect sizes for all sorts of mental problems have been showed in meta-analysises. 
-            For example here a study on depression that that showed a Hedges g of g = 3.1 (!) after one week and still g = 2.0 after 3 months, after one single dose."""},
+            {"type": "markdown", "label": """Even though research methods are debates in the field of psychedelics, strong effect sizes for all sorts of mental problems have been shown in meta-analyses. 
+            For example here a study on depression that showed a Hedges g of g = 3.1 (!) after one week and still g = 2.0 after 3 months, after one single dose. (Hedges g is (made for small sample sizes) is about equivalent to Cohens d)"""},
             {
                 "label": """ QIDS measures self-rated depression """,
                 "type": "image",
                 "src": "big_effects.png",
-                "width": 500,
+                "width": 350,
             },
             {"type": "markdown", "label": """Whereas conventional antidepressants score (in similar study designs) at around g = ~1.5. 
              But its not only effective with (treatment resistant) Depression, but also with: Alcohol use disorder, Anxiety and depression associated with cancer, Obsessive-compulsive disorder, smoking addiction, Anorexia nervosa."""},
@@ -46,21 +46,21 @@ PAGES = [
                 "end": "9m22s"
             },
             {"type": "markdown", "label": """## High Hopes?"""},
-            {"type": "markdown", "label": """But of course - not everyone benefits. The effectiveness depends _heavily_ on wether you have an experience and how much "mystical" it is and how much oceanic boundlessness you experience. As well as many other factors, like set and setting, correct dosing, preparation, going into the trip with expectation and intent, your trait absorption and much more. This Questionnaire is therefore trying to optimize and estimate these."""},
-            {"type": "markdown", "label": """This is a very good summary of the whole thing (i know this psychologist is problematic by now but this is seriously good)"""},
+            {"type": "markdown", "label": """But of course - not everyone benefits. The effectiveness depends _heavily_ on whether you have an experience and how much "mystical" it is and how much oceanic boundlessness you experience. As well as many other factors, like set and setting, correct dosing, preparation, going into the trip with expectation and intent, your trait absorption and much more. This questionnaire is therefore trying to optimize and estimate these."""},
+            {"type": "markdown", "label": """This is a very good summary of the whole thing (i know this psychologist is problematic by now but this is seriously good). He's referring to an important study of Roland Griffiths at Johns Hopkins."""},
             {
                 "label": """""",
                 "type": "video",
                 "url": "https://www.youtube.com/watch?v=K5C9Rnr3cDI",
                 "start": "0s",
-                "end": "12m53s"
+                "end": "7m29s"
             },
             
 
         ],
     },
 {
-        "title": "Triping - from start to end",
+        "title": "Tripping - from start to end",
         "intro": "A preparation and harm-reduction checklist — the day itself, during, and after.",
         "elements": [
 
@@ -91,7 +91,7 @@ PAGES = [
 
 - Have a **trusted friend present** — someone with low neuroticism and a lot of experience with psychedelics.
 - Possibly this friend takes a small dose too, so you can dive in *with* them while they still keep control.
-- And talk to them. Whatever is in you is welcome to be shared. **Share the trip** — connection is a core part of the experience."""},
+- And talk to them. Whatever is in you is welcome to be shared. Share the trip — connection is a core part of the experience. But if you have a need to be alone, embrace that too."""},
 
             {"type": "divider"},
 
@@ -109,9 +109,8 @@ PAGES = [
     },
     {
         "title": "Bad Trips",
-        "intro": "When set and setting is solid, bad trips are unlikely. BUT, its good to be prepared. Listen to this cutie (who is Roland Griffith and has sadly passed away) prepare you for a bad experience:",
+        "intro": "When set and setting is solid, bad trips are unlikely. BUT, its good to be prepared. Listen to this cutie (who is Roland Griffiths and has sadly passed away) prepare you for a bad experience:",
         "elements": [
-            
             {
                 "label": """""",
                 "type": "video",
@@ -119,6 +118,12 @@ PAGES = [
                 "start": "40min47s",
                 "end": "43m40s"
             },
+        ]
+    },
+    {
+        "title": "Quiz",
+        "intro": "Now, do you still remember what Roland told you?",
+        "elements": [
             {
                 "key": "active_recall_demon",
                 "label": "Active Recall!! What do you do when a demon appears?",
@@ -128,10 +133,9 @@ PAGES = [
     },
     {
         "title": "After the trip",
-        "intro": """It is extremely important to integrate the trip after the trip. You also have a 2 week neuroplasticity window - here it matters what you learn, because your brain learns more easily.
+        "intro": """It is extremely important to integrate the trip after the trip. There is also evidence on a 2 week heightened neuroplasticity window - here it matters what you learn, because your brain learns more easily.
         Here a very insightful metaphor from my favorite psychiatrist:""",
         "elements": [
-            
             {
                 "label": """""",
                 "type": "video",
@@ -151,7 +155,7 @@ PAGES = [
 - What's an insight you really want to keep?
 - What was difficult during the trip — and how is *that* information too?
 
-→ Maybe talk to the sitter again some days later. It can be good to be understood in the ineffable (the things in the trip you cant describe in words)"""},
+→ Maybe talk to the sitter again some days later. It can be good to be understood in the ineffable (the things in the trip you can’t describe in words)"""},
         ],
     },
         {
@@ -233,7 +237,7 @@ PAGES = [
             },
             {
                 "key": "absorption3",
-                "label": "I can get so immersed in in a film/play/book that I completely lose track of my surroundings",
+                "label": "I can get so immersed in a film/play/book that I completely lose track of my surroundings",
                 "type": "radio",
                 "options": ["1=don't agree at all", "2", "3", "4", "5=strongly agree"],
             },
@@ -297,7 +301,7 @@ PAGES = [
             },
             {
                 "key": "touch_preference",
-                "label": "How comfortable are you with touch? (hand holding, hugging, putting a hand on the body weightfully) (It can have great therapeutic potential, but only if handeld right)",
+                "label": "How comfortable are you with touch? (hand holding, hugging, putting a hand on the body weightfully) (It can have great therapeutic potential, but only if handled right)",
                 "type": "radio",
                 "options": ["I dont like being touched at all, unless I specifically say so", "I am okay with touch, if it feels right in the moment. I know I can communicate in both directions", "I enjoy this kind of touch. I will communicate if I dont like something.", "i dont know"],
             },  
@@ -331,7 +335,7 @@ PAGES = [
             }, 
             {
                 "key": "concerns",
-                "label": "What are concerns you still have?",
+                "label": "What concerns do you still have?",
                 "type": "textarea",
                 "required": False,
             },
@@ -358,7 +362,7 @@ PAGES = [
 This is a decision you are making for yourself. I will do what I can to make it safe and useful — screening, preparation, sitting, integration — but nobody can guarantee a psychedelic experience goes well. Please only continue if you are choosing this freely."""},
             {
                 "key": "legal_confirmation",
-                "label": "I confirm that agree and understand:",
+                "label": "I confirm that I agree and understand:",
                 "type": "radio",
                 "options": ["yes", "no"],
             },
