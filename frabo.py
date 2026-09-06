@@ -66,7 +66,12 @@ PAGES = [
 
             {"type": "markdown", "label": """## On the day — preparations"""},
             {"type": "markdown", "label": """A psilocybin trip lasts around **4-6 hours.**"""},
-
+            {
+                "label": """ "de muet zum chaos" """,
+                "type": "image",
+                "src": "curve.png",
+                "width": 350,
+            },
             {"type": "markdown", "label": """**Your head:**
 
 - Cultivate a mindset to fully accept and welcome everything that comes.
