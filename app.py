@@ -229,16 +229,6 @@ def submit() -> None:
 
 def render_thank_you() -> None:
     st.title("Thanks! 🎉")
-    st.success(f"Your answers were saved to `{storage.DATA_FILE}`.")
-
-    answers = collect_answers()
-
-    st.download_button(
-        "Download my answers (JSON)",
-        data=json.dumps(answers, indent=2, ensure_ascii=False),
-        file_name="my_answers.json",
-        mime="application/json",
-    )
 
     st.download_button(
         "Download my certificate (HTML)",
