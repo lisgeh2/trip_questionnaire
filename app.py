@@ -15,6 +15,7 @@ import auth
 import storage
 from full_database.process_meta import PAGES, all_elements, element_keys, is_input
 from render_certificate import render
+import process_responses as pr
 # Every answer is stored in st.session_state under this prefix, e.g. "q_age".
 ANSWER_PREFIX = "q_"
 
@@ -222,7 +223,11 @@ def submit() -> None:
 
     answers = collect_answers()
     storage.save_response(st.session_state.username, answers)
-    st.session_state.certificate_html = render(answers["token"])
+
+    records = pr.reload_responses()
+    token = [r for r in records if r["username"] == st.session_state.username][-1]["token"]
+
+    st.session_state.certificate_html = render(token)
     st.session_state.submitted = True
     st.rerun()
 
