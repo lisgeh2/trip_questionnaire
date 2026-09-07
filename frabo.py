@@ -27,7 +27,7 @@ PAGES = [
                 "src": "big_effects.png",
                 "width": 400,
             },
-            {"type": "markdown", "label": """Whereas conventional antidepressants score (in similar study designs) at around g = ~1.5. 
+            {"type": "markdown", "label": """Whereas conventional antidepressants score (in similar study designs) at around g = ~2.5. 
              But its not only effective with (treatment resistant) Depression, but also with: Alcohol use disorder, Anxiety and depression associated with cancer, Obsessive-compulsive disorder, smoking addiction, Anorexia nervosa."""},
             {"type": "markdown", "label": "Mostly though, the psychedelic approach is a *different* one, rather than a stronger one:"},
             {
