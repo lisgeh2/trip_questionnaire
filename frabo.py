@@ -20,7 +20,7 @@ PAGES = [
                 "width": 400,
             },
             {"type": "markdown", "label": """Even though research methods are debates in the field of psychedelics, strong effect sizes for all sorts of mental problems have been shown in meta-analyses. 
-            For example here a study on depression that showed a Hedges g of g = 3.1 (!) after one week and still g = 2.0 after 3 months, after one single dose. (Hedges g is (made for small sample sizes) is about equivalent to Cohens d)"""},
+            For example here a study on depression that showed a Hedges g of g = 3.1 (!) after one week and still g = 2.0 after 3 months, after one therapeutic dose. (Hedges g is (made for small sample sizes) is about equivalent to Cohens d)"""},
             {
                 "label": """ QIDS measures self-rated depression """,
                 "type": "image",
