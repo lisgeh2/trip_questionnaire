@@ -125,7 +125,7 @@ def give_base_dose(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc
 
 def absorption_dose_factor(token="0dbf99c72f98247392b90464ec3eb13a90f8244d9610fef4817cbc1fe327fc91"):
     absorption_avg = calculate_average(["absorption1", "absorption2", "absorption3"], token = token)
-    standardized = (absorption_avg-2.389705)/5
+    standardized = (absorption_avg-ABSORPTION_MEAN)/5
     standardized = standardized*-1 #because more absorption menas less dosing
     # maximally it can go 0.5 down or 0.5 up
     # so if you wanna take 1.7 g -> 0.85g down or up
